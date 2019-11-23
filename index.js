@@ -44,11 +44,11 @@ io.on('connection', function(socket){
 
 //	var arrayLength = details.length;
 //	for (var i = 0; i < arrayLength; i++) {
-    socket.emit('chat message', 'Balance: ' + details.balance);
+    socket.emit('chat message', 'Balance: ' + details.balance + ' BCH');
     socket.emit('chat message', 'Balance in Sats: ' + details.balanceSat);
-    socket.emit('chat message', 'Unconfirmed Balance: ' + details.unconfirmedBalance);
+    socket.emit('chat message', 'Unconfirmed Balance: ' + details.unconfirmedBalance + ' BCH');
     socket.emit('chat message', 'Unconfirmed Balance in Sats: ' + details.unconfirmedBalanceSat);
-    socket.emit('chat message', 'Total Received: ' + details.totalReceived);
+    socket.emit('chat message', 'Total Received: ' + details.totalReceived + ' BCH');
     socket.emit('chat message', 'Total Sats Received: ' + details.totalReceivedSat);
 	socket.emit('chat message', 'Total Sats Sent: ' + details.totalSentSat);
    
@@ -59,7 +59,7 @@ io.on('connection', function(socket){
 
 			// set interval to run clearFunc every 12 hours in milliseconds
 			let details = await bitbox.Address.details(msg);
-			socket.emit('chat message', 'Unconfirmed Balance: ' + details.unconfirmedBalance);
+			socket.emit('chat message', 'Unconfirmed Balance: ' + details.unconfirmedBalance + ' BCH');
 
 			if (details.unconfirmedBalance == 0){
 				socket.emit('chat message', 'Unconfirmed Balance for ' + msg + ' has been confirmed!');
