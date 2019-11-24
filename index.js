@@ -17,18 +17,29 @@ io.on('connection', function(socket){
 // new user connected
 
   // welcome message to user on this specific socket
-  socket.emit('chat message', '+---------------------------------------------+');
-  socket.emit('chat message', '|_________________________XXXXXX______________|');
-  socket.emit('chat message', '|_XX___XX_________X_______XXXXXX______________|');
-  socket.emit('chat message', '|_XXX _XX_________X_______X____X______________|');
-  socket.emit('chat message', '|_XXXXXXX_XXXX____X_XXXX__X XXXX_XXXXX_XXX_XXX|');
-  socket.emit('chat message', '|_XX_XXXX_X__X_XXXX_X_____X____X_X___X___XXX__|');
-  socket.emit('chat message', '|_XX__XXX_XXXX_X__X_XXX___XX___X_X___X___XXX__|');
-  socket.emit('chat message', '|_XX___XX______XXXX_X_____XXXXXX_XXXXX_XXX_XXX|');
-  socket.emit('chat message', '|___________________XXXX______________________|');
-  socket.emit('chat message', '+---------------------------------------------+');
 
-	socket.emit('update', 'Hello! This is a Node.js app utilzing socket.io & the BITBOX npm module. Enter a BCH address in any format to display all information about the address. All information entered into the cnosole is only shared within your socket and so is private to your user.');
+
+
+  socket.emit('chat message', '███▄▄▄▄____▄██████▄__████████▄_____▄████████_▀█████████▄___▄██████▄__▀████____▐████▀');
+  socket.emit('chat message', '███▀▀▀██▄_███____███_███___▀███___███____███___███____███_███____███___███▌___████▀_');
+  socket.emit('chat message', '███___███_███____███_███____███___███____█▀____███____███_███____███____███__▐███___');
+  socket.emit('chat message', '███___███_███____███_███____███__▄███▄▄▄______▄███▄▄▄██▀__███____███____▀███▄███▀___');
+  socket.emit('chat message', '███___███_███____███_███____███_▀▀███▀▀▀_____▀▀███▀▀▀██▄__███____███____████▀██▄____');
+  socket.emit('chat message', '███___███_███____███_███____███___███____█▄____███____██▄_███____███___▐███__▀███___');
+  socket.emit('chat message', '███___███_███____███_███___▄███___███____███___███____███_███____███__▄███_____███▄_');
+  socket.emit('chat message', '_▀█___█▀___▀██████▀__████████▀____██████████_▄█████████▀___▀██████▀__████_______███▄');
+  socket.emit('chat message', '_________░_____░_░_____░_______░__░_░__________░_░___░____░__');
+  socket.emit('chat message', '_____________________░___________________░___________________');
+  socket.emit('chat message', '▄_•▄▄▄▄_▄▄▄_.▄▄▄·____▄▄▄▄·▪▄▄▄▄▄▄▄·_____▪__▐_▄_____·▄▄▄▄▄_▄▄▄_▄▄▄_.__________▄▄▄__▄▄_•_');
+  socket.emit('chat message', '█▌▄▌▀▄.▀▀▄.▀▐█_▄█____▐█_▀██•██_▐█_▌▪____██•█▌▐█____▐▄▄▀▄_█▀▄.▀▀▄.▀·_____▪____▀▄_█▐█_▀_▪');
+	socket.emit('chat message', '▐▀▀▄▐▀▀▪▐▀▀▪▄██▀·____▐█▀▀█▐█▐█.██_▄▄▄█▀▄▐█▐█▐▐▌____██▪▐▀▀▄▐▀▀▪▐▀▀▪▄______▄█▀▄▐▀▀▄▄█_▀█▄');
+  socket.emit('chat message', '▐█.█▐█▄▄▐█▄▄▐█▪·•____██▄▪▐▐█▐█▌▐███▐█▌.▐▐███▐█▌____██▌▐█•█▐█▄▄▐█▄▄▌_____▐█▌.▐▐█•█▐█▄▪▐█');
+  socket.emit('chat message', '·▀__▀▀▀▀_▀▀▀.▀_______·▀▀▀▀▀▀▀▀▀·▀▀▀_▀█▄▀▀▀▀▀_█▪____▀▀▀.▀__▀▀▀▀_▀▀▀___▀___▀█▄▀.▀__·▀▀▀▀_');
+  socket.emit('chat message', '_______________________________________________________________________________________');
+
+
+
+  socket.emit('update', 'Hello! This is a Node.js app utilzing socket.io & the BITBOX npm module. Enter a BCH address in any format to display all information about the address. All information entered into the cnosole is only shared within your socket and so is private to your user.');
 
 	// fucntion for submitted form
   socket.on('chat message', function(msg){
