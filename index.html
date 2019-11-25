@@ -13,7 +13,7 @@
     margin-top:10px;
     font-size:14px;
     background-color:black;
-    line-height:.92em;
+    line-height:normal;
 
       }
       li {
@@ -49,6 +49,9 @@
       $(function () {
         var socket = io(); 
         $('form').submit(function(){
+          if($('#m').val() == 'clear'){
+            location.reload();
+          }
           socket.emit('chat message', $('#m').val());
           $('#m').val('');
           return false;
@@ -59,6 +62,10 @@
         });
         socket.on('update', function(msg){
           $('#messages').append($('<li style="color:#0f0;">').text(msg));
+          window.scrollTo(0, document.body.scrollHeight);
+        });
+        socket.on('logo', function(msg){
+          $('#messages').append($('<li style="line-height:.1em;color:red;">').text(msg));
           window.scrollTo(0, document.body.scrollHeight);
         });
       });

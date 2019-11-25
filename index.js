@@ -20,26 +20,26 @@ io.on('connection', function(socket){
 
 
 
-  socket.emit('chat message', '███▄▄▄▄____▄██████▄__████████▄_____▄████████_▀█████████▄___▄██████▄__▀████____▐████▀');
-  socket.emit('chat message', '███▀▀▀██▄_███____███_███___▀███___███____███___███____███_███____███___███▌___████▀_');
-  socket.emit('chat message', '███___███_███____███_███____███___███____█▀____███____███_███____███____███__▐███___');
-  socket.emit('chat message', '███___███_███____███_███____███__▄███▄▄▄______▄███▄▄▄██▀__███____███____▀███▄███▀___');
-  socket.emit('chat message', '███___███_███____███_███____███_▀▀███▀▀▀_____▀▀███▀▀▀██▄__███____███____████▀██▄____');
-  socket.emit('chat message', '███___███_███____███_███____███___███____█▄____███____██▄_███____███___▐███__▀███___');
-  socket.emit('chat message', '███___███_███____███_███___▄███___███____███___███____███_███____███__▄███_____███▄_');
-  socket.emit('chat message', '_▀█___█▀___▀██████▀__████████▀____██████████_▄█████████▀___▀██████▀__████_______███▄');
-  socket.emit('chat message', '_________░_____░_░_____░_______░__░_░__________░_░___░____░__');
-  socket.emit('chat message', '_____________________░___________________░___________________');
-  socket.emit('chat message', '▄_•▄▄▄▄_▄▄▄_.▄▄▄·____▄▄▄▄·▪▄▄▄▄▄▄▄·_____▪__▐_▄_____·▄▄▄▄▄_▄▄▄_▄▄▄_.__________▄▄▄__▄▄_•_');
-  socket.emit('chat message', '█▌▄▌▀▄.▀▀▄.▀▐█_▄█____▐█_▀██•██_▐█_▌▪____██•█▌▐█____▐▄▄▀▄_█▀▄.▀▀▄.▀·_____▪____▀▄_█▐█_▀_▪');
-	socket.emit('chat message', '▐▀▀▄▐▀▀▪▐▀▀▪▄██▀·____▐█▀▀█▐█▐█.██_▄▄▄█▀▄▐█▐█▐▐▌____██▪▐▀▀▄▐▀▀▪▐▀▀▪▄______▄█▀▄▐▀▀▄▄█_▀█▄');
-  socket.emit('chat message', '▐█.█▐█▄▄▐█▄▄▐█▪·•____██▄▪▐▐█▐█▌▐███▐█▌.▐▐███▐█▌____██▌▐█•█▐█▄▄▐█▄▄▌_____▐█▌.▐▐█•█▐█▄▪▐█');
-  socket.emit('chat message', '·▀__▀▀▀▀_▀▀▀.▀_______·▀▀▀▀▀▀▀▀▀·▀▀▀_▀█▄▀▀▀▀▀_█▪____▀▀▀.▀__▀▀▀▀_▀▀▀___▀___▀█▄▀.▀__·▀▀▀▀_');
-  socket.emit('chat message', '_______________________________________________________________________________________');
+  socket.emit('logo', '███▄▄▄▄____▄██████▄__████████▄_____▄████████_▀█████████▄___▄██████▄__▀████____▐████▀');
+  socket.emit('logo', '███▀▀▀██▄_███____███_███___▀███___███____███___███____███_███____███___███▌___████▀_');
+  socket.emit('logo', '███___███_███____███_███____███___███____█▀____███____███_███____███____███__▐███___');
+  socket.emit('logo', '███___███_███____███_███____███__▄███▄▄▄______▄███▄▄▄██▀__███____███____▀███▄███▀___');
+  socket.emit('logo', '███___███_███____███_███____███_▀▀███▀▀▀_____▀▀███▀▀▀██▄__███____███____████▀██▄____');
+  socket.emit('logo', '███___███_███____███_███____███___███____█▄____███____██▄_███____███___▐███__▀███___');
+  socket.emit('logo', '███___███_███____███_███___▄███___███____███___███____███_███____███__▄███_____███▄_');
+  socket.emit('logo', '_▀█___█▀___▀██████▀__████████▀____██████████_▄█████████▀___▀██████▀__████_______███▄');
+  socket.emit('logo', '_________░_____░_░_____░_______░__░_░__________░_░___░____░________░_░__________░_░_');
+  socket.emit('logo', '_____________________░___________________░___________░_░__________░_____░___________');
+  socket.emit('logo', '▄_•▄▄▄▄_▄▄▄_.▄▄▄·____▄▄▄▄·▪▄▄▄▄▄▄▄·_____▪__▐_▄_____·▄▄▄▄▄_▄▄▄_▄▄▄_.__________▄▄▄__▄▄_•_');
+  socket.emit('logo', '█▌▄▌▀▄.▀▀▄.▀▐█_▄█____▐█_▀██•██_▐█_▌▪____██•█▌▐█____▐▄▄▀▄_█▀▄.▀▀▄.▀·_____▪____▀▄_█▐█_▀_▪');
+	socket.emit('logo', '▐▀▀▄▐▀▀▪▐▀▀▪▄██▀·____▐█▀▀█▐█▐█.██_▄▄▄█▀▄▐█▐█▐▐▌____██▪▐▀▀▄▐▀▀▪▐▀▀▪▄______▄█▀▄▐▀▀▄▄█_▀█▄');
+  socket.emit('logo', '▐█.█▐█▄▄▐█▄▄▐█▪·•____██▄▪▐▐█▐█▌▐███▐█▌.▐▐███▐█▌____██▌▐█•█▐█▄▄▐█▄▄▌_____▐█▌.▐▐█•█▐█▄▪▐█');
+  socket.emit('logo', '·▀__▀▀▀▀_▀▀▀.▀_______·▀▀▀▀▀▀▀▀▀·▀▀▀_▀█▄▀▀▀▀▀_█▪____▀▀▀.▀__▀▀▀▀_▀▀▀___▀___▀█▄▀.▀__·▀▀▀▀_');
+  socket.emit('logo', '_______________________________________________________________________________________');
 
 
 
-  socket.emit('update', 'Hello! This is a Node.js app utilzing socket.io & the BITBOX npm module. Enter a BCH address in any format to display all information about the address. All information entered into the cnosole is only shared within your socket and so is private to your user.');
+  socket.emit('update', 'Hello! This is a Node.js app utilzing socket.io & the BITBOX npm module. Enter "help" to view all available commands. All information entered into the console is only shared within your socket and is private only to your browser session with NodeBox.');
 
 	// fucntion for submitted form
   socket.on('chat message', function(msg){
@@ -47,41 +47,90 @@ io.on('connection', function(socket){
     
   // trim the message string to remove any leading or late 
   msg = msg.trim();
-
+  // .toLowerCase()
+  // root@nodebox.io
+  socket.emit('chat message', '₿ ' + msg);
   //socket.emit('chat message', '₿');
+
+  //TODO: ignore capitalization for msgs
+
+ // SIGN module: if there are commas present in the msg & the first word is 'sign' then try to sign a message with PrivateKeyWIF
+  // TESTING: sign, KxtpRDUJDiutLaTV8Vuavhb6h7zq9YV9ZKA3dU79PCgYmNVmkkvS, Bitcoin Cash is Bitcoin
+  try {
+      console.log('checking if msg qualifies for the sign message module');
+    msgArray = msg.split(',');
+  //  console.log('msgArray Length is: ' + msgArray.length);
+    if (msgArray.length > 1) {
+      //trim all values
+      msgArray[0] = msgArray[0].trim();
+      msgArray[1] = msgArray[1].trim();
+      msgArray[2] = msgArray[2].trim();
+        console.log(msgArray);
+    //  console.log(msgArray[0]);
+   //   console.log(msgArray[1]);
+    //  console.log(msgArray[2]);
+      if (msgArray[0] == 'sign'){
+       // console.log('it is SIGN, signing message');
+       // console.log(msgArray[1], msgArray[2]);
+        let signedMessage = bitbox.BitcoinCash.signMessageWithPrivKey(msgArray[1], msgArray[2]);
+       // console.log(signedMessage);
+        socket.emit('chat message', 'PrivatekeyWIF: ' + msgArray[1].substring(0, 47) + '*****');
+        socket.emit('chat message', 'Message: ' + msgArray[2]);
+        socket.emit('chat message', 'Signed Message: ' + signedMessage);
+        socket.emit('chat message', ' ');
+        return;
+      }
+
+
+      //TODO: add functionality for toSatoshi(9) by splitting string into array by ( then again by ).
+      //var words = str.split('(');
+      //console.log(words);
+      //var word2 = words[1];
+      //var words2 = word2.split(')');
+      return;
+    }
+  //  msgArray = msg.split('(', ')');
+
+  }catch(error){
+    console.log(error);
+  }
+
+  msg = msg.toLowerCase();
 
   // HELP module
   try{
+    console.log('checking if msg qualifies for help module');
     if (msg == 'help'){
-      socket.emit('chat message', 'Type a BCH address to get info for that address. If an unconfirmed balance is detected for that address, the system will track it until it is confirmed. Type "sign, PRIVATEKEYWIF, MESSAGE" to sign a message with a private key. ');
+      socket.emit('update', 'Enter a BCH address in Legacy or CashAddr format to display information about that address. If an unconfirmed balance is detected for that address, the system will track it until it is confirmed.');
+      socket.emit('update', 'Enter "getBlockchainInfo" to return info regarding the BCH Blockchain');
+      socket.emit('update', 'Enter "sign, PRIVATEKEYWIF, MESSAGE" to sign a message with a private key.');
+      socket.emit('update', 'Enter "clear" to clear the screen and start fresh');
       return;
     }
   }catch(error){
     console.log(error);
   }
 
+  // GET BLOCKCHAIN INFO module
+  try{
+      console.log('checking if msg qualifies for help getBlockchainInfo module');
+    if (msg == 'getblockchaininfo'){
+      
+    (async () => {
+    try {
+      let getBlockchainInfo = await bitbox.Blockchain.getBlockchainInfo();
+      //console.log(getBlockchainInfo);
+    socket.emit('update', 'BlockChain Info for BCH:');
+    socket.emit('chat message', 'Chain: ' + getBlockchainInfo.chain);
+    socket.emit('chat message', 'Blocks: ' + getBlockchainInfo.blocks);
+    socket.emit('chat message', 'Best Block Hash: ' + getBlockchainInfo.bestblockhash);
+    socket.emit('chat message', 'Difficulty: ' + getBlockchainInfo.difficulty);
+    socket.emit('chat message', 'Mediantime: ' + getBlockchainInfo.mediantime);
 
-  // SIGN module: if there are commas present in the msg & the first word is 'sign' then try to sign a message with PrivateKeyWIF
-  try {
-    msgArray = msg.split(',');
-    console.log('msgArray Length is: ' + msgArray.length);
-    if (msgArray.length > 1) {
-      //trim all values
-      msgArray[0] = msgArray[0].trim();
-      msgArray[1] = msgArray[1].trim();
-      msgArray[2] = msgArray[2].trim();
-      console.log(msgArray);
-      if (msgArray[0] == 'sign'){
-        let signedMessage = bitbox.BitcoinCash.signMessageWithPrivKey(
-        msgArray[1],
-        msgArray[2]);
-        console.log(signedMessage);
-        socket.emit('chat message', 'PrivatekeyWIF: ' + msgArray[1].substring(0, 47) + '*****');
-        socket.emit('chat message', 'Message: ' + msgArray[2]);
-        socket.emit('chat message', 'Signed Message: ' + signedMessage);
-        socket.emit('chat message', '₿');
-      }
-
+    } catch(error) {
+      console.error(error)
+    }
+  })()
       return;
     }
   }catch(error){
@@ -124,7 +173,7 @@ io.on('connection', function(socket){
 		}
 
     //separator for each address
-    socket.emit('chat message', '₿');
+    socket.emit('chat message', ' ');
     
   } catch(error) {
   // catch error for details array and print only to console if it fails
