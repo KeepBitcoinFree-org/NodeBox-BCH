@@ -20,16 +20,17 @@
         background:black; 
         background-color:black;
       }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 80%;  }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 700px;  }
       form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
       form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { }
       #messages { margin-bottom: 40px }
-      #messages li { background-color:black; }
+      #messages li { background-color:black; position:relative;
+      }
       #tracker { margin:2em;  position: fixed; top: 0; left: 0; z-index: 999; width: 100%; height: 23px;}
-      @media only screen and (max-width: 868px) {
+      @media only screen and (max-width: 788px) {
         form {
           width: 100%;
         }
@@ -55,6 +56,10 @@
         $('form').submit(function(){
           if($('#m').val() == 'clear'){
             location.reload();
+          }
+
+          if($('#m').val() == 'donate'){
+            $('#messages').append($('<li style="color:#0f0;text-align:center;"><a href="bitcoincash:qpphskv6mgh62teqjhumsnr6xxqqux9t7cfw9n4rmr"><img src="https://keepbitcoinfree.org/wp-content/uploads/2019/10/KBF-BCH-DONATION-QR-290x300.png" height=250px width=250px /></a>'));
           }
           socket.emit('chat message', $('#m').val());
           $('#m').val('');

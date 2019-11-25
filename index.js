@@ -37,9 +37,14 @@ io.on('connection', function(socket){
   socket.emit('logo', '·▀__▀▀▀▀_▀▀▀.▀_____·▀▀▀▀▀▀▀▀▀·▀▀▀_▀█▄▀▀▀▀▀_█▪___▀▀▀.▀__▀▀▀▀_▀▀▀___▀___▀█▄▀.▀__·▀▀▀▀_');
   socket.emit('logo', '____________________________________________________________________________________');
 
+  socket.emit('update', ' ');
+
+  socket.emit('update', 'Wake up, Neo...');
 
 
-  socket.emit('update', 'Hello! This is a Node.js app utilzing socket.io & the BITBOX npm module. Enter "help" to view all available commands. All information entered into the console is only shared within your socket and is private only to your browser session with NodeBox.');
+  //maybe pause here for a minute, then continue?
+
+  socket.emit('update', 'This is a Node.js app demonstrating some functionality of the Socket.io & BITBOX npm modules. Enter "help" to view all available commands. All data entered is private to your socket, or browser session.');
 
 	// fucntion for submitted form
   socket.on('chat message', function(msg){
@@ -49,10 +54,28 @@ io.on('connection', function(socket){
   msg = msg.trim();
   // .toLowerCase()
   // root@nodebox.io
+
   socket.emit('chat message', '₿ ' + msg);
   //socket.emit('chat message', '₿');
 
-  //TODO: ignore capitalization for msgs
+  // if they type donate, we handle on client side so return here
+  if (msg.toLowerCase() == 'donate'){
+   return;
+  }
+ 
+    // USE THIS FOR COMMANDS WITH PARENTHESIS such as toSatoshi(5)
+    var regExp = /\(([^)]+)\)/;
+    //var matches = regExp.exec("I expect five hundred dollars ($500).");
+    //console.log(matches[1]);
+    //TODO: add functionality for toSatoshi(9) by splitting string into array by ( then again by ).
+    //var words = str.split('(');
+    //console.log(words);
+    //var word2 = words[1];
+    //var words2 = word2.split(')');
+// }
+
+
+
 
  // SIGN module: if there are commas present in the msg & the first word is 'sign' then try to sign a message with PrivateKeyWIF
   // TESTING: sign, KxtpRDUJDiutLaTV8Vuavhb6h7zq9YV9ZKA3dU79PCgYmNVmkkvS, Bitcoin Cash is Bitcoin
@@ -117,12 +140,7 @@ io.on('connection', function(socket){
 
       }
 
-
-      //TODO: add functionality for toSatoshi(9) by splitting string into array by ( then again by ).
-      //var words = str.split('(');
-      //console.log(words);
-      //var word2 = words[1];
-      //var words2 = word2.split(')');
+      // TODO: add any other functionality when splitting string by commas
       return;
 
     }
@@ -145,7 +163,8 @@ io.on('connection', function(socket){
       socket.emit('update', 'Enter "sign, PRIVATEKEYWIF, MESSAGE" to sign a message with a private key.');
       socket.emit('example', 'sign, KxtpRDUJDiutLaTV8Vuavhb6h7zq9YV9ZKA3dU79PCgYmNVmkkvS, Bitcoin Cash is Bitcoin');
       socket.emit('update', 'Enter "verify, BCH_ADDRESS, SIGNATURE, MESSAGE" to verify a signed message.');
-      socket.emit('example', 'verify, bitcoincash:qp2zvw3zpk5xx43w4tve7mtekd9kaxwj4uenq9eupv, IIYVhlo2Z6TWFjYX1+YM+7vQKz0m+zYdSe4eYpFLuAQDEZXqll7lZC8Au22VI2LLP5x+IerZckVk3QQPsA3e8/8=, Bitcoin is Cash');
+      socket.emit('example', 'verify, bitcoincash:qp2zvw3zpk5xx43w4tve7mtekd9kaxwj4uenq9eupv, IIYVhlo2Z6TWFjYX1+YM+7vQKz0m+zYdSe4eYpFLuAQDEZXqll7lZC8Au22VI2LLP5x+IerZckVk3QQPsA3e8/8=, EARTH');
+      socket.emit('update', 'Enter "donate" to view a donation address for KeepBitcoinFree.org');
       socket.emit('update', 'Enter "clear" to clear the screen and start fresh');
       return;
     }
