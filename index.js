@@ -79,7 +79,7 @@ io.on('connection', function(socket){
   }, 4500);
 
   setTimeout(function() {
-      socket.emit('update', 'Welcome. NodeBox is a Node.js app demonstrating functionality of the Socket.io & BITBOX-sdk npm modules. Enter "help" to view all available commands. All data entered is private to your socket, or browser session.');
+      socket.emit('update', 'Welcome. NodeBox is a Node.js app demonstrating functionality of the Socket.io & BITBOX-sdk npm modules. Enter "help" to view all available commands. All data entered is private to each socket, or browser session.');
   }, 7000);
   //maybe pause here for a minute, then continue?
 
@@ -378,7 +378,7 @@ try{
     socket.emit('update', 'Verification Progress: ' + getBlockchainInfo.verificationprogress);
     socket.emit('update', 'Chainwork: ' + getBlockchainInfo.chainwork);
     socket.emit('update', 'Pruned: ' + getBlockchainInfo.pruned);
-    socket.emit('update', 'Softfork: ' + JSON.stringify(getBlockchainInfo.softforks));
+    //socket.emit('update', 'Softfork: ' + JSON.stringify(getBlockchainInfo.softforks));
     socket.emit('update', 'BIP9_softfork: ' + JSON.stringify(getBlockCount.bip9_softforks));
 
     } catch(error) {
@@ -391,15 +391,24 @@ try{
     console.log(error);
   }
 
+   
+
+
+
     //ADDRESS DETAILS: using BITBOX to hit API and get info for BCH address.
     // async function to get all details of BCH address
-    (async () => {
+    
   try {
-    //use BITBOX to get details of BCH address submitted by user
+   
+  (async () => {
+    // use BITBOX to get details of BCH address submitted by user
     let details = await bitbox.Address.details(msg);
-
+    // use BITBOX to GET BCH PRICE IN USD
+    let usd = await bitbox.Price.current('usd');
+    usd = usd / 100;
+    let balanceUsd = details.balance * usd;
     // break down details array & print to user
-    socket.emit('update', 'Balance: ' + details.balance + ' BCH');
+    socket.emit('update', 'Balance: ' + details.balance + ' BCH  ($' + balanceUsd.toFixed(2) + ' USD)');
     socket.emit('update', 'Balance in Sats: ' + details.balanceSat);
     socket.emit('update', 'Unconfirmed Balance: ' + details.unconfirmedBalance + ' BCH');
     socket.emit('update', 'Unconfirmed Balance in Sats: ' + details.unconfirmedBalanceSat);
@@ -426,11 +435,13 @@ try{
 		}
     //separator for each address
     //socket.emit('chat message', '');
+  })()
+
   } catch(error) {
   // catch error for details array and print only to console if it fails
    console.error(error)
   }
-})()
+
 
     
   // bitcoincash:qzm47qz5ue99y9yl4aca7jnz7dwgdenl85jkfx3znl
