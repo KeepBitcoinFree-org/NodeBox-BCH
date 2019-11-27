@@ -1,19 +1,39 @@
 # NodeBox-BCH
-Node.js app utilizing socket.io & BITBOX for viewing details about a BCH address &amp; tracking unconfirmed balances.
+NodeBox is a Node.js app demonstrating functionality of the Socket.io & BITBOX-sdk npm modules. Enter "help" to view all available commands. All data entered is private to each socket, or browser session.
 
-Available online at:
+███▄▄▄▄____▄██████▄__████████▄_____▄████████_▀█████████▄___▄██████▄__▀████____▐████▀
+███▀▀▀██▄_███____███_███___▀███___███____███___███____███_███____███___███▌___████▀_
+███___███_███____███_███____███___███____█▀____███____███_███____███____███__▐███___
+███___███_███____███_███____███__▄███▄▄▄______▄███▄▄▄██▀__███____███____▀███▄███▀___
+███___███_███____███_███____███_▀▀███▀▀▀_____▀▀███▀▀▀██▄__███____███____████▀██▄____
+███___███_███____███_███____███___███____█▄____███____██▄_███____███___▐███__▀███___
+███___███_███____███_███___▄███___███____███___███____███_███____███__▄███_____███▄_
+_▀█___█▀___▀██████▀__████████▀____██████████_▄█████████▀___▀██████▀__████_______███▄
+_░_░_____░_____░_░_____░_______░__░_░__________░_░___░____░________░_░__________░_░_
+_____░_______________░___________________░___________░_░__________░_____░___________
+▄_•▄▄▄▄_▄▄▄_.▄▄▄·__▄▄▄▄·▪▄▄▄▄▄▄▄·_____▪__▐_▄____·▄▄▄▄▄_▄▄▄_▄▄▄_.__________▄▄▄__▄▄_•_
+█▌▄▌▀▄.▀▀▄.▀▐█_▄█__▐█_▀██•██_▐█_▌▪____██•█▌▐█___▐▄▄▀▄_█▀▄.▀▀▄.▀·_____▪____▀▄_█▐█_▀_▪
+▐▀▀▄▐▀▀▪▐▀▀▪▄██▀·__▐█▀▀█▐█▐█.██_▄▄▄█▀▄▐█▐█▐▐▌___██▪▐▀▀▄▐▀▀▪▐▀▀▪▄______▄█▀▄▐▀▀▄▄█_▀█▄
+▐█.█▐█▄▄▐█▄▄▐█▪·•__██▄▪▐▐█▐█▌▐███▐█▌.▐▐███▐█▌___██▌▐█•█▐█▄▄▐█▄▄▌_____▐█▌.▐▐█•█▐█▄▪▐█
+·▀__▀▀▀▀_▀▀▀.▀_____·▀▀▀▀▀▀▀▀▀·▀▀▀_▀█▄▀▀▀▀▀_█▪___▀▀▀.▀__▀▀▀▀_▀▀▀___▀___▀█▄▀.▀__·▀▀▀▀_
+____________________________________________________________________________________
 
-< Coming soon > 
 
+## Available online at:
+https://nodebox.keepbitcoinfree.org
 
-To run locally (must have node.js installed):
+### To run locally (must have node.js installed):
+
+git clone https://github.com/KeepBitcoinFree-org/NodeBox-BCH.git
+
+cd NodeBox-BCH
 
 npm install
 
 node index
 
 
-Included in package.json file to be installed with the app:
+Included in package.json file are the dependencies to be installed with npm install:
 
   "dependencies": {
     "bitbox-sdk": "^8.8.1",
