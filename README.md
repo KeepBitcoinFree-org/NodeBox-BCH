@@ -7,7 +7,7 @@ NodeBox is a Node.js app demonstrating functionality of the Socket.io & BITBOX-s
 ## Available online at:
 https://nodebox.keepbitcoinfree.org
 
-### To run locally (must have node.js installed):
+### To run NodeBox locally, run the following commands(must have Node.js installed):
 
 git clone https://github.com/KeepBitcoinFree-org/NodeBox-BCH.git
 
