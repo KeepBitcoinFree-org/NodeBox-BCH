@@ -1,4 +1,7 @@
 # NodeBox-BCH
+
+![NodeBox](https://keepbitcoinfree.org/wp-content/uploads/2019/11/NodeBox-logo.png)
+
 NodeBox is a Node.js app demonstrating functionality of the Socket.io & BITBOX-sdk npm modules. Enter "help" to view all available commands. All data entered is private to each socket, or browser session.
 
 ## Available online at:
