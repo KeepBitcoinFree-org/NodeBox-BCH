@@ -37,11 +37,51 @@ io.on('connection', function(socket){
   socket.emit('logo', '·▀__▀▀▀▀_▀▀▀.▀_____·▀▀▀▀▀▀▀▀▀·▀▀▀_▀█▄▀▀▀▀▀_█▪___▀▀▀.▀__▀▀▀▀_▀▀▀___▀___▀█▄▀.▀__·▀▀▀▀_');
   socket.emit('logo', '____________________________________________________________________________________');
 
-  socket.emit('update', ' ');
-  socket.emit('update', 'Wake up, Neo....');
+  
 
+  socket.emit('update', ' ');
+  
+  // INTRO OF OLD BOOTING COMPUTER
+
+  // Grab and print date/time and IP of user upon form submission/post
+  let submitDate = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+  var date = new Date();
+  let mdy = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear();
+  submitDate = submitDate.split(' ');
+  console.log(submitDate);
+
+  //09/29/91
+    setTimeout(function() {
+  socket.emit('update', 'BIOS Date ' + mdy + ' ' + submitDate[1] + ' Ver: 08.00.16');
+  }, 1000);
+      setTimeout(function() {
+  socket.emit('update', 'CPU: Intel(R) CPU 330 @ 40 MHz');
+  }, 1200);
+        setTimeout(function() {
+  socket.emit('update', 'Speed: 40 MHz');
+  }, 1400);
+
+  setTimeout(function() {
+  socket.emit('update', 'PMU ROM Version: 9303');
+  }, 1600);
+
+    setTimeout(function() {
+  socket.emit('update', 'NVMM ROM Version: 4.092589');
+  }, 1800);
+      setTimeout(function() {
+  socket.emit('update', 'Initializing USB Controllers...');
+  }, 2000);
+        setTimeout(function() {
+  socket.emit('update', 'Auto-detecting USB Mass Storage Devices...');
+  }, 3000);
+          setTimeout(function() {
+  socket.emit('update', 'Booting from Hard Disk...');
+  }, 4500);
+
+  setTimeout(function() {
+      socket.emit('update', 'Welcome. NodeBox is a Node.js app demonstrating functionality of the Socket.io & BITBOX-sdk npm modules. Enter "help" to view all available commands. All data entered is private to your socket, or browser session.');
+  }, 7000);
   //maybe pause here for a minute, then continue?
-  socket.emit('update', 'NodeBox is a Node.js app demonstrating functionality of the Socket.io & BITBOX-sdk npm modules. Enter "help" to view all available commands. All data entered is private to your socket, or browser session.');
 
 	// fucntion for submitted form
   socket.on('chat message', function(msg){
@@ -51,7 +91,7 @@ io.on('connection', function(socket){
   msg = msg.trim();
   msglow = msg.toLowerCase();
 	console.log(msg);
-  socket.emit('chat message', '~ ₿ ' + msg);
+  socket.emit('chat message', '₿:\\ ' + msg);
   //socket.emit('chat message', '₿');
 
   // if they type donate, we handle on client side so return here
@@ -101,6 +141,7 @@ io.on('connection', function(socket){
         try {
           let utxo = await bitbox.Address.utxo('1M1FYu4zuVaxRPWLZG5CnP8qQrZaqu6c2L');
           console.log(utxo);
+          //TODO: break this out or build for loop to print each obj in array.
           socket.emit('update', JSON.stringify(utxo));
 
         } catch(error) {
@@ -174,6 +215,38 @@ io.on('connection', function(socket){
 
       }
 
+      // encryptBIP38
+      if( msgArray[0] == 'encryptBIP38') {
+
+        privKeyWIF = msgArray[1];
+        pass = msgArray[2];
+
+        let encryptBIP38 = bitbox.BitcoinCash.encryptBIP38(privKeyWIF, pass);
+        socket.emit('update', 'PrivatekeyWIF: ' + privKeyWIF.substring(0, 47) + '*****');
+        socket.emit('update', 'Password: ' + pass);
+        socket.emit('update', 'BIP28 Encrypted PrivatekeyWIF: ' + encryptBIP38);
+
+      }
+
+      // decryptBIP38
+      if( msgArray[0] == 'decryptBIP38') {
+
+        privKeyWIF = msgArray[1];
+        pass = msgArray[2];
+        network = msgArray[3];
+
+        // mainnet (encryptedPRIVKEY, password to decrypt with, network)
+        let decryptBIP38 = bitbox.BitcoinCash.decryptBIP38('6PYU2fDHRVF2194gKDGkbFbeu4mFgkWtVvg2RPd2Sp6KmZx3RCHFpgBB2G', '9GKVkabAHBMyAf', 'mainnet');
+        // L1phBREbhL4vb1uHHHCAse8bdGE5c7ic2PFjRxMawLzQCsiFVbvu
+
+        socket.emit('update', 'PrivatekeyWIF: ' + privKeyWIF.substring(0, 47) + '*****');
+        socket.emit('update', 'Password: ' + pass);
+        socket.emit('update', 'Network ' + network);
+        socket.emit('update', 'BIP28 Decrypted PrivatekeyWIF: ' + decryptBIP38);
+
+      }
+
+
       // TODO: add any other functionality when splitting string by commas
       return;
 
@@ -199,6 +272,10 @@ io.on('connection', function(socket){
       socket.emit('update', 'Enter "toSatoshi(# of BCH)" to return the amount of Satoshis for the supplied amount of BCH');
       socket.emit('update', 'Enter "toBitcoinCash(# of Satoshis)" to return the amount of BCH for supplied amount of Sats');
       socket.emit('update', 'Enter utxo(BCH_ADDRESS) to return a list of utxos for a legacy or cash address');
+      socket.emit('update', 'Enter "encryptBIP38, PRIVATEKEYWIF, PASSWORD" to encrypt privkey WIFs with BIP39');
+      socket.emit('example', 'encryptBIP38, L1phBREbhL4vb1uHHHCAse8bdGE5c7ic2PFjRxMawLzQCsiFVbvu, Password123');
+      socket.emit('update', 'Enter "decryptBIP38, encryptedPRIVATEKEYWIF, PASSWORD to decrypt with, network"');
+      socket.emit('example', 'decryptBIP38, 6PYU2fDHRVF2194gKDGkbFbeu4mFgkWtVvg2RPd2Sp6KmZx3RCHFpgBB2G, 9GKVkabAHBMyAf, mainnet');
       socket.emit('update', 'Enter "sign, PRIVATEKEYWIF, MESSAGE" to sign a message with a private key.');
       socket.emit('example', 'sign, KxtpRDUJDiutLaTV8Vuavhb6h7zq9YV9ZKA3dU79PCgYmNVmkkvS, Bitcoin Cash is Bitcoin');
       socket.emit('update', 'Enter "verify, BCH_ADDRESS, SIGNATURE, MESSAGE" to verify a signed message.');
