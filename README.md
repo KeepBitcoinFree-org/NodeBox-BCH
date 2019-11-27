@@ -23,5 +23,5 @@ Included in package.json file are the dependencies to be installed with npm inst
   "dependencies": {
     "bitbox-sdk": "^8.8.1",
     "express": "^4.15.2",
-    "socket.io": "^1.7.3"
+    "socket.io": "^1.7.3" 
   }
