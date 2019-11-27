@@ -27,7 +27,8 @@
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { }
       #messages { margin-bottom: 40px }
-      #messages li { background-color:black; position:relative;
+      #messages li { background-color:black; 
+	/*position:relative;*/
       }
       #tracker { margin:2em;  position: fixed; top: 0; left: 0; z-index: 999; width: 100%; height: 23px;}
       @media only screen and (max-width: 788px) {
@@ -35,6 +36,18 @@
           width: 100%;
         }
       }
+	@media only screen and (max-device-width: 480px) { 
+		
+	body {
+	  width:480;
+	  overflow: hidden;
+	}
+	#messages li {
+	  width:480;
+
+	}
+
+	}
     </style>
   </head>
   <!-- background: #000;  font: 13px Helvetica, Arial;  -->
@@ -78,7 +91,7 @@
           window.scrollTo(0, document.body.scrollHeight);
         });
         socket.on('logo', function(msg){
-          $('#messages').append($('<li style="line-height:.1em;color:red;">').text(msg));
+          $('#messages').append($('<li style="line-height:.1em;color:white;">').text(msg));
           window.scrollTo(0, document.body.scrollHeight);
         });
       });

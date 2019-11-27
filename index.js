@@ -1,7 +1,7 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var port = process.env.PORT || 80;
+var port = process.env.PORT || 8088;
 
 // require syntax for BCH BITBOX
 let BITBOX = require('bitbox-sdk').BITBOX;
@@ -50,7 +50,7 @@ io.on('connection', function(socket){
   // trim the message string to remove any leading or late 
   msg = msg.trim();
   msglow = msg.toLowerCase();
-
+	console.log(msg);
   socket.emit('chat message', '~ ₿ ' + msg);
   //socket.emit('chat message', '₿');
 
