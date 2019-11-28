@@ -20,24 +20,46 @@ io.on('connection', function(socket){
 
 
 
-  socket.emit('logo', '███▄▄▄▄____▄██████▄__████████▄_____▄████████_▀█████████▄___▄██████▄__▀████____▐████▀');
-  socket.emit('logo', '███▀▀▀██▄_███____███_███___▀███___███____███___███____███_███____███___███▌___████▀_');
-  socket.emit('logo', '███___███_███____███_███____███___███____█▀____███____███_███____███____███__▐███___');
-  socket.emit('logo', '███___███_███____███_███____███__▄███▄▄▄______▄███▄▄▄██▀__███____███____▀███▄███▀___');
-  socket.emit('logo', '███___███_███____███_███____███_▀▀███▀▀▀_____▀▀███▀▀▀██▄__███____███____████▀██▄____');
-  socket.emit('logo', '███___███_███____███_███____███___███____█▄____███____██▄_███____███___▐███__▀███___');
-  socket.emit('logo', '███___███_███____███_███___▄███___███____███___███____███_███____███__▄███_____███▄_');
-  socket.emit('logo', '_▀█___█▀___▀██████▀__████████▀____██████████_▄█████████▀___▀██████▀__████_______███▄');
-  socket.emit('logo', '_░_░_____░_____░_░_____░_______░__░_░__________░_░___░____░________░_░__________░_░_');
-  socket.emit('logo', '_____░_______________░___________________░___________░_░__________░_____░___________');
-  socket.emit('logo', '▄_•▄▄▄▄_▄▄▄_.▄▄▄·__▄▄▄▄·▪▄▄▄▄▄▄▄·_____▪__▐_▄____·▄▄▄▄▄_▄▄▄_▄▄▄_.__________▄▄▄__▄▄_•_');
-  socket.emit('logo', '█▌▄▌▀▄.▀▀▄.▀▐█_▄█__▐█_▀██•██_▐█_▌▪____██•█▌▐█___▐▄▄▀▄_█▀▄.▀▀▄.▀·_____▪____▀▄_█▐█_▀_▪');
-	socket.emit('logo', '▐▀▀▄▐▀▀▪▐▀▀▪▄██▀·__▐█▀▀█▐█▐█.██_▄▄▄█▀▄▐█▐█▐▐▌___██▪▐▀▀▄▐▀▀▪▐▀▀▪▄______▄█▀▄▐▀▀▄▄█_▀█▄');
-  socket.emit('logo', '▐█.█▐█▄▄▐█▄▄▐█▪·•__██▄▪▐▐█▐█▌▐███▐█▌.▐▐███▐█▌___██▌▐█•█▐█▄▄▐█▄▄▌_____▐█▌.▐▐█•█▐█▄▪▐█');
-  socket.emit('logo', '·▀__▀▀▀▀_▀▀▀.▀_____·▀▀▀▀▀▀▀▀▀·▀▀▀_▀█▄▀▀▀▀▀_█▪___▀▀▀.▀__▀▀▀▀_▀▀▀___▀___▀█▄▀.▀__·▀▀▀▀_');
-  socket.emit('logo', '____________________________________________________________________________________');
+ // socket.emit('logo', '███▄▄▄▄____▄██████▄__████████▄_____▄████████_▀█████████▄___▄██████▄__▀████____▐████▀');
+ // socket.emit('logo', '███▀▀▀██▄_███____███_███___▀███___███____███___███____███_███____███___███▌___████▀_');
+ // socket.emit('logo', '███___███_███____███_███____███___███____█▀____███____███_███____███____███__▐███___');
+ // socket.emit('logo', '███___███_███____███_███____███__▄███▄▄▄______▄███▄▄▄██▀__███____███____▀███▄███▀___');
+ // socket.emit('logo', '███___███_███____███_███____███_▀▀███▀▀▀_____▀▀███▀▀▀██▄__███____███____████▀██▄____');
+ // socket.emit('logo', '███___███_███____███_███____███___███____█▄____███____██▄_███____███___▐███__▀███___');
+ // socket.emit('logo', '███___███_███____███_███___▄███___███____███___███____███_███____███__▄███_____███▄_');
+ // socket.emit('logo', '_▀█___█▀___▀██████▀__████████▀____██████████_▄█████████▀___▀██████▀__████_______███▄');
+ // socket.emit('logo', '_░_░_____░_____░_░_____░_______░__░_░__________░_░___░____░________░_░__________░_░_');
+ // socket.emit('logo', '_____░_______________░___________________░___________░_░__________░_____░___________');
+ // socket.emit('logo', '▄_•▄▄▄▄_▄▄▄_.▄▄▄·__▄▄▄▄·▪▄▄▄▄▄▄▄·_____▪__▐_▄____·▄▄▄▄▄_▄▄▄_▄▄▄_.__________▄▄▄__▄▄_•_');
+ // socket.emit('logo', '█▌▄▌▀▄.▀▀▄.▀▐█_▄█__▐█_▀██•██_▐█_▌▪____██•█▌▐█___▐▄▄▀▄_█▀▄.▀▀▄.▀·_____▪____▀▄_█▐█_▀_▪');
+//	socket.emit('logo', '▐▀▀▄▐▀▀▪▐▀▀▪▄██▀·__▐█▀▀█▐█▐█.██_▄▄▄█▀▄▐█▐█▐▐▌___██▪▐▀▀▄▐▀▀▪▐▀▀▪▄______▄█▀▄▐▀▀▄▄█_▀█▄');
+//  socket.emit('logo', '▐█.█▐█▄▄▐█▄▄▐█▪·•__██▄▪▐▐█▐█▌▐███▐█▌.▐▐███▐█▌___██▌▐█•█▐█▄▄▐█▄▄▌_____▐█▌.▐▐█•█▐█▄▪▐█');
+//  socket.emit('logo', '·▀__▀▀▀▀_▀▀▀.▀_____·▀▀▀▀▀▀▀▀▀·▀▀▀_▀█▄▀▀▀▀▀_█▪___▀▀▀.▀__▀▀▀▀_▀▀▀___▀___▀█▄▀.▀__·▀▀▀▀_');
+//  socket.emit('logo', '____________________________________________________________________________________');
 
   
+socket.emit('logo', '_______________________________________________________________________');
+socket.emit('logo', '_______________________________________________________________________');
+socket.emit('logo', '__"MM\\_____"M"_______________"MM_________"MMMMMMMb.____________________');
+socket.emit('logo', '___MMM\\_____M_________________MM__________MM____"Mb____________________');
+socket.emit('logo', '___M\\MM\\____M_________________MM__________MM_____MM____________________');
+socket.emit('logo', '___M_\\MM\\___M__6MMMMMb___6MMMMMM__6MMMMb__MM____.M9__6MMMMMb_"MM(___)P_');
+socket.emit('logo', '___M__\\MM\\__M_6M"___"Mb_6M"__"MM_6M"__"Mb_MMMMMMM(__6M"___"Mb_"MM"_,P__');
+socket.emit('logo', '___M___\\MM\\_M_MM_____MM_MM____MM_MM____MM_MM____"Mb_MM_____MM__"MM,P___');
+socket.emit('logo', '___M____\\MM\\M_MM_____MM_MM____MM_MMMMMMMM_MM_____MM_MM_____MM___"MM.___');
+socket.emit('logo', '___M_____\\MMM_MM_____MM_MM____MM_MM_______MM_____MM_MM_____MM___d"MM.__');
+socket.emit('logo', '___M______\\MM_YM.___,M9_YM.__,MM_YM____d9_MM____.M9_YM.___,M9__d"_"MM._');
+socket.emit('logo', '___M_______\\M__YMMMMM9___YMMMMMM__YMMMM9__MMMMMMM9"__YMMMMM9__d____)MM_');
+socket.emit('logo', '___________________________+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+_____');
+socket.emit('logo', '___________________________|K|e|e|p|B|i|t|c|o|i|n|F|r|e|e|.|o|r|g|_____');
+socket.emit('logo', '___________________________+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+_____');
+
+
+
+
+
+
+
 
   socket.emit('update', ' ');
   
@@ -73,14 +95,14 @@ io.on('connection', function(socket){
   }, 2000);
         setTimeout(function() {
   socket.emit('update', 'Auto-detecting USB Mass Storage Devices...');
-  }, 3000);
+  }, 2600);
           setTimeout(function() {
   socket.emit('update', 'Booting from Hard Disk...');
-  }, 4500);
+  }, 3500);
 
   setTimeout(function() {
       socket.emit('update', 'Welcome. NodeBox is a Node.js app demonstrating functionality of the Socket.io & BITBOX-sdk npm modules. Enter "help" to view all available commands. All data entered is private to each socket, or browser session.');
-  }, 7000);
+  }, 4500);
   //maybe pause here for a minute, then continue?
 
 	// fucntion for submitted form
@@ -98,11 +120,11 @@ io.on('connection', function(socket){
   if (msglow == 'donate'){
     // add bitcoincash text donation address. client site returns QR code.
    socket.emit('update', 'Donate BCH to KeepBitcoinFree.org:');
-   socket.emit('update', 'bitcoincash:qpphskv6mgh62teqjhumsnr6xxqqux9t7cfw9n4rmr');
+   socket.emit('example', 'bitcoincash:qpphskv6mgh62teqjhumsnr6xxqqux9t7cfw9n4rmr');
    return;
   }
 
-  if (msglow == 'clear'){
+  if ((msglow == 'reboot') || (msglow == 'clear')) {
     return;
   }
   
@@ -281,7 +303,7 @@ io.on('connection', function(socket){
       socket.emit('update', 'Enter "verify, BCH_ADDRESS, SIGNATURE, MESSAGE" to verify a signed message.');
       socket.emit('example', 'verify, bitcoincash:qp2zvw3zpk5xx43w4tve7mtekd9kaxwj4uenq9eupv, II+rsv72D/KnZ6noO25WWtXnu3C2seCuJEJ6HwB3yalFTbeBjF1FSw6XuaOnxpwsrEXHimIdJB9k3aKsJaQB0L0=, Bitcoin Cash is Bitcoin');
       socket.emit('update', 'Enter "donate" to view a donation address for KeepBitcoinFree.org');
-      socket.emit('update', 'Enter "clear" to clear the screen and start fresh');
+      socket.emit('update', 'Enter "reboot" or "clear" to clear the screen and start fresh');
       return;
     }
   }catch(error){
