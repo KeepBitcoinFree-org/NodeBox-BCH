@@ -13,13 +13,12 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
+
+// NEW USER CONNECTED HERE
 io.on('connection', function(socket){
-// new user connected
+  
 
-  // welcome message to user on this specific socket
-
-
-
+  // welcome message to user on this specific socket (each browser visit is a separate socket)
   socket.emit('logo', '███▄▄▄▄____▄██████▄__████████▄_____▄████████_▀█████████▄___▄██████▄__▀████____▐████▀');
   socket.emit('logo', '███▀▀▀██▄_███____███_███___▀███___███____███___███____███_███____███___███▌___████▀_');
   socket.emit('logo', '███___███_███____███_███____███___███____█▀____███____███_███____███____███__▐███___');
@@ -37,42 +36,17 @@ io.on('connection', function(socket){
   socket.emit('logo', '·▀__▀▀▀▀_▀▀▀.▀_____·▀▀▀▀▀▀▀▀▀·▀▀▀_▀█▄▀▀▀▀▀_█▪___▀▀▀.▀__▀▀▀▀_▀▀▀___▀___▀█▄▀.▀__·▀▀▀▀_');
   socket.emit('logo', '____________________________________________________________________________________');
 
-  
-//socket.emit('logo', '_______________________________________________________________________');
-//socket.emit('logo', '_______________________________________________________________________');
-//socket.emit('logo', '__"MM\\_____"M"_______________"MM_________"MMMMMMMb.____________________');
-//socket.emit('logo', '___MMM\\_____M_________________MM__________MM____"Mb____________________');
-//socket.emit('logo', '___M\\MM\\____M_________________MM__________MM_____MM____________________');
-//socket.emit('logo', '___M_\\MM\\___M__6MMMMMb___6MMMMMM__6MMMMb__MM____.M9__6MMMMMb_"MM(___)P_');
-//socket.emit('logo', '___M__\\MM\\__M_6M"___"Mb_6M"__"MM_6M"__"Mb_MMMMMMM(__6M"___"Mb_"MM"_,P__');
-//socket.emit('logo', '___M___\\MM\\_M_MM_____MM_MM____MM_MM____MM_MM____"Mb_MM_____MM__"MM,P___');
-//socket.emit('logo', '___M____\\MM\\M_MM_____MM_MM____MM_MMMMMMMM_MM_____MM_MM_____MM___"MM.___');
-//socket.emit('logo', '___M_____\\MMM_MM_____MM_MM____MM_MM_______MM_____MM_MM_____MM___d"MM.__');
-//socket.emit('logo', '___M______\\MM_YM.___,M9_YM.__,MM_YM____d9_MM____.M9_YM.___,M9__d"_"MM._');
-//socket.emit('logo', '___M_______\\M__YMMMMM9___YMMMMMM__YMMMM9__MMMMMMM9"__YMMMMM9__d____)MM_');
-//socket.emit('logo', '___________________________+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+_____');
-//socket.emit('logo', '___________________________|K|e|e|p|B|i|t|c|o|i|n|F|r|e|e|.|o|r|g|_____');
-//socket.emit('logo', '___________________________+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+_____');
-
-
-
-
-
-
-
-
   socket.emit('update', ' ');
   
-  // INTRO OF OLD BOOTING COMPUTER
+  // INTRO OF OLD SCHOOL COMPUTER BOOTING UP
 
   // Grab and print date/time and IP of user upon form submission/post
   let submitDate = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
   var date = new Date();
   let mdy = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear();
   submitDate = submitDate.split(' ');
-  console.log(submitDate);
+  //console.log('Website visited on ' + submitDate);
 
-  //09/29/91
     setTimeout(function() {
   socket.emit('update', 'BIOS Date ' + mdy + ' ' + submitDate[1] + ' Ver: 08.00.16');
   }, 1000);
@@ -102,21 +76,46 @@ io.on('connection', function(socket){
 
   setTimeout(function() {
       socket.emit('update', 'Welcome. NodeBox is a Node.js app demonstrating functionality of the Socket.io & BITBOX-sdk npm modules. Enter "help" to view all available commands. All data entered is private to each socket, or browser session.');
-  }, 4500);
+  }, 4200);
   //maybe pause here for a minute, then continue?
 
-	// fucntion for submitted form
+	// FORM SUBMIT STARTS HERE
   socket.on('chat message', function(msg){
   // message (msg) has been submitted, take actions
     
   // trim the message string to remove any leading or late 
   msg = msg.trim();
   msglow = msg.toLowerCase();
-	console.log(msg);
-  socket.emit('chat message', '₿:\\ ' + msg);
-  //socket.emit('chat message', '₿');
+  //logs for debugging submission and flow
+	//console.log('User submitted: ' + msg);
 
-  // if they type donate, we handle on client side so return here
+  //print the users command back to them with a prefix
+  socket.emit('chat message', '₿:\\ ' + msg);
+
+  // REGULAR WORD MATCHES, including donate, reboot, clean,
+
+  // GetMiningInfo()
+  if (msglow == 'getmininginfo'){
+    (async () => {
+    try {
+     let getMiningInfo = await bitbox.Mining.getMiningInfo();
+     console.log(getMiningInfo);
+     socket.emit('update', 'Blocks: ' + getMiningInfo.blocks);
+     socket.emit('update', 'CurrentBlocksize: ' + getMiningInfo.currentblocksize);
+     socket.emit('update', 'CurrentBlockTx: ' + getMiningInfo.currentblocktx);
+     socket.emit('update', 'Difficulty: ' + getMiningInfo.difficulty);
+     socket.emit('update', 'Block Priority Percentage: %' + getMiningInfo.blockprioritypercentage);
+     socket.emit('update', 'Networkhashps: ' + getMiningInfo.networkhashps);
+     socket.emit('update', 'PooledTx: ' + getMiningInfo.pooledtx);
+     socket.emit('update', 'Chain: ' +  getMiningInfo.chain);
+    } catch(error) {
+     console.error(error)
+      } 
+    })()
+    return;
+  }
+
+  // if they type donate, return donation BCH address.
   if (msglow == 'donate'){
     // add bitcoincash text donation address. client site returns QR code.
    socket.emit('update', 'Donate BCH to KeepBitcoinFree.org:');
@@ -124,6 +123,7 @@ io.on('connection', function(socket){
    return;
   }
 
+  // if they enter reboot or clear, we handle on the client side so just return
   if ((msglow == 'reboot') || (msglow == 'clear')) {
     return;
   }
@@ -162,7 +162,7 @@ io.on('connection', function(socket){
         (async () => {
         try {
           let utxo = await bitbox.Address.utxo('1M1FYu4zuVaxRPWLZG5CnP8qQrZaqu6c2L');
-          console.log(utxo);
+          //console.log(utxo);
           //TODO: break this out or build for loop to print each obj in array.
           socket.emit('update', JSON.stringify(utxo));
 
@@ -193,7 +193,7 @@ io.on('connection', function(socket){
       if (msgArray.length > 3){
        msgArray[3] = msgArray[3].trim();
       }
-        console.log(msgArray);
+        //console.log(msgArray);
 
       // check if sign is called
       if (msgArray[0] == 'sign'){
@@ -218,10 +218,10 @@ io.on('connection', function(socket){
         }
       }
 
+      // TODO: FINISH BIP21encoded
 
       // check if encodeBIP21 is called
       if (msgArray[0] == 'encodeBIP21'){
-        // TODO: FINISH BIP21encoded
         // encodeBIP21 MODULE - to add options to BCH address such as amount, label & message
         let address = '1C6hRmfzvWst5WA7bFRCVAqHt5gE2g7Qar'
         let options = {
@@ -293,6 +293,7 @@ io.on('connection', function(socket){
       socket.emit('update', 'Enter "getMempoolInfo" to return the latest info about the current mempool');
       socket.emit('update', 'Enter "toSatoshi(# of BCH)" to return the amount of Satoshis for the supplied amount of BCH');
       socket.emit('update', 'Enter "toBitcoinCash(# of Satoshis)" to return the amount of BCH for supplied amount of Sats');
+      socket.emit('update', 'Enter "getMiningInfo" to return mining-related information');
       socket.emit('update', 'Enter utxo(BCH_ADDRESS) to return a list of utxos for a legacy or cash address');
       socket.emit('update', 'Enter "encryptBIP38, PRIVATEKEYWIF, PASSWORD" to encrypt privkey WIFs with BIP39');
       socket.emit('example', 'encryptBIP38, L1phBREbhL4vb1uHHHCAse8bdGE5c7ic2PFjRxMawLzQCsiFVbvu, 9GKVkabAHBMyAf');
@@ -318,7 +319,7 @@ try{
   (async () => {
   try {
     let getMempoolInfo = await bitbox.Blockchain.getMempoolInfo();
-    console.log(getMempoolInfo);
+   // console.log(getMempoolInfo);
    // print entire array at once: socket.emit('array', JSON.stringify(getMempoolInfo));
     socket.emit('update', 'Size: ' + getMempoolInfo.size);
     socket.emit('update', 'Bytes: ' + getMempoolInfo.bytes);
@@ -401,7 +402,7 @@ try{
     socket.emit('update', 'Chainwork: ' + getBlockchainInfo.chainwork);
     socket.emit('update', 'Pruned: ' + getBlockchainInfo.pruned);
     //socket.emit('update', 'Softfork: ' + JSON.stringify(getBlockchainInfo.softforks));
-    socket.emit('update', 'BIP9_softfork: ' + JSON.stringify(getBlockCount.bip9_softforks));
+    //socket.emit('update', 'BIP9_softfork: ' + JSON.stringify(getBlockCount.bip9_softforks));
 
     } catch(error) {
       console.error(error)
@@ -413,15 +414,13 @@ try{
     console.log(error);
   }
 
-   
-
-
-
+    // IF msg doesn't match anything else, let's check the 
     //ADDRESS DETAILS: using BITBOX to hit API and get info for BCH address.
     // async function to get all details of BCH address
-    
+  
   try {
    
+   //TODO: move price grab outside of address balance details to use elsewhere in price(amount of BCH)
   (async () => {
     // use BITBOX to get details of BCH address submitted by user
     let details = await bitbox.Address.details(msg);
@@ -438,14 +437,18 @@ try{
     socket.emit('update', 'Total Sats Received: ' + details.totalReceivedSat);
 	  socket.emit('update', 'Total Sats Sent: ' + details.totalSentSat);
    
-	while (details.unconfirmedBalance > 0){
-			socket.emit('update', 'Unconfirmed balance detected.... Tracking the balance until it is confirmed.')
+	if (details.unconfirmedBalance > 0){
+    socket.emit('update', 'Unconfirmed Balance: ' + details.unconfirmedBalance + ' BCH');
+
+  }
+
+  while (details.unconfirmedBalance > 0){
+			//socket.emit('update', 'Unconfirmed balance detected.... Tracking the balance until it is confirmed.')
 
       //re-check the balance every 10 seconds until balance == 0
 			await new Promise(resolve => setTimeout(resolve, 10000));
 
 			let details = await bitbox.Address.details(msg);
-			socket.emit('update', 'Unconfirmed Balance: ' + details.unconfirmedBalance + ' BCH');
 
       // check if balance is 0
 			if (details.unconfirmedBalance == 0){
