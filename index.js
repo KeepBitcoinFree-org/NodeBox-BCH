@@ -304,7 +304,7 @@ io.on('connection', function(socket){
       socket.emit('update', 'Enter "verify, BCH_ADDRESS, SIGNATURE, MESSAGE" to verify a signed message.');
       socket.emit('example', 'verify, bitcoincash:qp2zvw3zpk5xx43w4tve7mtekd9kaxwj4uenq9eupv, II+rsv72D/KnZ6noO25WWtXnu3C2seCuJEJ6HwB3yalFTbeBjF1FSw6XuaOnxpwsrEXHimIdJB9k3aKsJaQB0L0=, Bitcoin Cash is Bitcoin');
       socket.emit('update', 'Enter "donate" to view a donation address for KeepBitcoinFree.org');
-      socket.emit('update', 'Enter "reboot" or "clear" to clear the screen and start fresh');
+    //  socket.emit('update', 'Enter "reboot" or "clear" to clear the screen and start fresh');
       return;
     }
   }catch(error){
