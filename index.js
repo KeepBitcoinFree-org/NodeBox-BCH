@@ -72,12 +72,12 @@ io.on('connection', function(socket){
   }, 2600);
           setTimeout(function() {
   socket.emit('update', 'Booting from Hard Disk...');
-  }, 3500);
+  }, 3300);
 
   setTimeout(function() {
       socket.emit('update', 'Welcome. NodeBox is a Node.js app demonstrating functionality of the Socket.io & BITBOX-sdk npm modules. Enter "help" to view all available commands. All data entered is private to each socket, or browser session.');
-  }, 4200);
-  //maybe pause here for a minute, then continue?
+  }, 4400);
+  
 
 	// FORM SUBMIT STARTS HERE
   socket.on('chat message', function(msg){
