@@ -47,37 +47,39 @@ io.on('connection', function(socket){
   submitDate = submitDate.split(' ');
   //console.log('Website visited on ' + submitDate);
 
-    setTimeout(function() {
-  socket.emit('update', 'BIOS Date ' + mdy + ' ' + submitDate[1] + ' Ver: 08.00.16');
-  }, 1000);
-      setTimeout(function() {
-  socket.emit('update', 'CPU: Intel(R) CPU 330 @ 40 MHz');
-  }, 1200);
-        setTimeout(function() {
-  socket.emit('update', 'Speed: 40 MHz');
-  }, 1400);
+ //   setTimeout(function() {
+ // socket.emit('update', 'BIOS Date ' + mdy + ' ' + submitDate[1] + ' Ver: 08.00.16');
+ // }, 1000);
+ //     setTimeout(function() {
+ // socket.emit('update', 'CPU: Intel(R) CPU 330 @ 40 MHz');
+ // }, 1200);
+ //       setTimeout(function() {
+ // socket.emit('update', 'Speed: 40 MHz');
+ // }, 1400);
 
-  setTimeout(function() {
-  socket.emit('update', 'PMU ROM Version: 9303');
-  }, 1600);
+//  setTimeout(function() {
+//  socket.emit('update', 'PMU ROM Version: 9303');
+//  }, 1600);
 
-    setTimeout(function() {
-  socket.emit('update', 'NVMM ROM Version: 4.092589');
-  }, 1800);
-      setTimeout(function() {
-  socket.emit('update', 'Initializing USB Controllers...');
-  }, 2000);
-        setTimeout(function() {
-  socket.emit('update', 'Auto-detecting USB Mass Storage Devices...');
-  }, 2600);
-          setTimeout(function() {
-  socket.emit('update', 'Booting from Hard Disk...');
-  }, 3300);
+//  setTimeout(function() {
+//  socket.emit('update', 'NVMM ROM Version: 4.092589');
+//  }, 1800);
+//      setTimeout(function() {
+//  socket.emit('update', 'Initializing USB Controllers...');
+//  }, 2000);
+//        setTimeout(function() {
+//  socket.emit('update', 'Auto-detecting USB Mass Storage Devices...');
+//  }, 2600);
+//          setTimeout(function() {
+//  socket.emit('update', 'Booting from Hard Disk...');
+//  }, 3300);
 
-  setTimeout(function() {
-      socket.emit('update', 'Welcome. NodeBox is a Node.js app demonstrating functionality of the Socket.io & BITBOX-sdk npm modules. Enter "help" to view all available commands. All data entered is private to each socket, or browser session.');
-  }, 4400);
+//  setTimeout(function() {
+      
+//  }, 4400);
   
+
+socket.emit('update', 'Welcome. NodeBox is a Node.js app demonstrating functionality of the Socket.io & BITBOX-sdk npm modules. Enter "help" to view all available commands. All data entered is private to each socket, or browser session.');
 
 	// FORM SUBMIT STARTS HERE
   socket.on('chat message', function(msg){
