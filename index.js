@@ -75,7 +75,8 @@ io.on('connection', function(socket){
   }, 3300);
 
   setTimeout(function() {
-      socket.emit('update', 'Welcome. NodeBox is a Node.js app demonstrating functionality of the Socket.io & BITBOX-sdk npm modules. Enter "help" to view all available commands. All data entered is private to each socket, or browser session.');
+      socket.emit('update', 'Welcome. NodeBox is an interactive terminal powered by the Node.js, Socket.io & BITBOX modules. Using NodeBox, you can view information about Bitcoin Cash addresses or the Blockchain. Enter "help" to view all available commands. All data entered is private to each socket, or browser session.');
+      socket.emit('example', 'Nodebox is still in beta. If you find critical any errors, let us know and we may send you a reward in SLP or BCH');
   }, 4400);
   
 
