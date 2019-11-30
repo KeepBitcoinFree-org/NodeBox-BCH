@@ -76,7 +76,7 @@ io.on('connection', function(socket){
 
   setTimeout(function() {
       socket.emit('update', 'Welcome. NodeBox is an interactive terminal powered by the Node.js, Socket.io & BITBOX modules. Using NodeBox, you can view information about Bitcoin Cash addresses or the Blockchain. Enter "help" to view all available commands. All data entered is private to each socket, or browser session.');
-      socket.emit('example', 'Nodebox is still in beta. If you find critical any errors, let us know and we may send you a reward in SLP or BCH');
+     // socket.emit('example', 'Nodebox is still in beta. If you find critical any errors, let us know and we may send you a reward in SLP or BCH');
   }, 4400);
   
 
@@ -305,7 +305,7 @@ io.on('connection', function(socket){
       socket.emit('update', 'Enter "verify, BCH_ADDRESS, SIGNATURE, MESSAGE" to verify a signed message.');
       socket.emit('example', 'verify, bitcoincash:qp2zvw3zpk5xx43w4tve7mtekd9kaxwj4uenq9eupv, II+rsv72D/KnZ6noO25WWtXnu3C2seCuJEJ6HwB3yalFTbeBjF1FSw6XuaOnxpwsrEXHimIdJB9k3aKsJaQB0L0=, Bitcoin Cash is Bitcoin');
       socket.emit('update', 'Enter "donate" to view a donation address for KeepBitcoinFree.org');
-    //   socket.emit('update', 'Enter "reboot" or "clear" to clear the screen and start fresh');
+      socket.emit('update', 'Enter "reboot" or "clear" to clear the screen and start fresh');
       return;
     }
   }catch(error){
