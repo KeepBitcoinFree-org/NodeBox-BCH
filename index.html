@@ -106,7 +106,7 @@
           window.scrollTo(0, document.body.scrollHeight);
         });
         socket.on('logo', function(msg){
-          $('#messages').append($('<li style="line-height:.1em;color:white;">').text(msg));
+          $('#messages').append($('<li style="line-height:.1em;color:white;text=align:center;">').text(msg));
           window.scrollTo(0, document.body.scrollHeight);
         });
       });

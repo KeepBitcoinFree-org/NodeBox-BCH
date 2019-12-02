@@ -46,15 +46,37 @@ io.on('connection', function(socket){
   socket.emit('logo', '███___███_███____███_███____███___███____█▄____███____██▄_███____███___▐███__▀███___');
   socket.emit('logo', '███___███_███____███_███___▄███___███____███___███____███_███____███__▄███_____███▄_');
   socket.emit('logo', '_▀█___█▀___▀██████▀__████████▀____██████████_▄█████████▀___▀██████▀__████_______███▄');
-  socket.emit('logo', '_░_░_____░_____░_░_____░___╔═╗┌─┐┬_┬┌─┐┬─┐┌─┐┌┬┐_╔╗_┬_┬__░_░___░____░________░_░____');
-  socket.emit('logo', '____░__________░___________╠═╝│_││││├┤_├┬┘├┤__││_╠╩╗└┬┘______░_____________░________');
-  socket.emit('logo', '___________________________╩__└─┘└┴┘└─┘┴└─└─┘─┴┘_╚═╝_┴_________________________░____');
+  socket.emit('logo', '_░_░_____░_____░_░_____░______░_____________░____________░_░___░____░________░_░____');
+  socket.emit('logo', '____░__________░___________╔═╗┌─┐┬_┬┌─┐┬─┐┌─┐┌┬┐_╔╗_┬_┬______░_____________░________');
+  socket.emit('logo', '___________________________╠═╝│_││││├┤_├┬┘├┤__││_╠╩╗└┬┘_________________________░___');
+  socket.emit('logo', '___________________________╩__└─┘└┴┘└─┘┴└─└─┘─┴┘_╚═╝_┴______________________________');
   socket.emit('logo', '▄_•▄▄▄▄_▄▄▄_.▄▄▄·__▄▄▄▄·▪▄▄▄▄▄▄▄·_____▪__▐_▄____·▄▄▄▄▄_▄▄▄_▄▄▄_.__________▄▄▄__▄▄_•_');
   socket.emit('logo', '█▌▄▌▀▄.▀▀▄.▀▐█_▄█__▐█_▀██•██_▐█_▌▪____██•█▌▐█___▐▄▄▀▄_█▀▄.▀▀▄.▀·_____▪____▀▄_█▐█_▀_▪');
 	socket.emit('logo', '▐▀▀▄▐▀▀▪▐▀▀▪▄██▀·__▐█▀▀█▐█▐█.██_▄▄▄█▀▄▐█▐█▐▐▌___██▪▐▀▀▄▐▀▀▪▐▀▀▪▄______▄█▀▄▐▀▀▄▄█_▀█▄');
   socket.emit('logo', '▐█.█▐█▄▄▐█▄▄▐█▪·•__██▄▪▐▐█▐█▌▐███▐█▌.▐▐███▐█▌___██▌▐█•█▐█▄▄▐█▄▄▌_____▐█▌.▐▐█•█▐█▄▪▐█');
   socket.emit('logo', '·▀__▀▀▀▀_▀▀▀.▀_____·▀▀▀▀▀▀▀▀▀·▀▀▀_▀█▄▀▀▀▀▀_█▪___▀▀▀.▀__▀▀▀▀_▀▀▀___▀___▀█▄▀.▀__·▀▀▀▀_');
-  socket.emit('logo', '____________________________________________________________________________________');
+  socket.emit('logo', 'MIIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIMMIIIMMIIIIIIIIIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIIM');
+  socket.emit('logo', 'MIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIMMMIIMMMMMMMMIIIIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIM');
+  socket.emit('logo', 'MIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIIMMMMMMMMMMMMMMMIIIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIM');
+  socket.emit('logo', 'MIIIIIIIIIIIIMMMMMMIIIIIIIIIIMMMMMMMMMMMMIMMMMMMMIIIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIM');
+  socket.emit('logo', 'MIIIIIIIIIIIIMMMMMIIIIIIIIIIIIMMMMMMMMIIIIIIIMMMMMIIIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIM');
+  socket.emit('logo', 'MIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIIIMMMMIIIIIIIMMMMIIIIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIM');
+  socket.emit('logo', 'MIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIIIMMMMMIIIIMMMMMMIIIIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIM');
+  socket.emit('logo', 'MIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIIIIMMMMMMMMMMMMMMMMMMIIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIM');
+  socket.emit('logo', 'MIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIIIIIMMMMMMMMMIIMMMMMMMIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIM');
+  socket.emit('logo', 'MIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIIIIIMMMMMIIIIIIIIMMMMMIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIM');
+  socket.emit('logo', 'MIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIIIIIMMMMIIIIIIIIMMMMMIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIM');
+  socket.emit('logo', 'MIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIIIIIMMMMMIIIIIIMMMMMMIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIM');
+  socket.emit('logo', 'MIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIIIIIMMMMMIIIMMMMMMMMIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIM');
+  socket.emit('logo', 'MIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIIIIMMMMMMMMMMMMMIIIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIM');
+  socket.emit('logo', 'MIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIIMMMMMMMMMMMMMIIIIIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIM');
+  socket.emit('logo', 'MIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIMMMMIIMMIIIMMIIIIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIM');
+  socket.emit('logo', 'MIIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIIIIIIMMMIIMMMIIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIIM');
+
+
+
+
+
 
 
   socket.emit('update', ' ');
