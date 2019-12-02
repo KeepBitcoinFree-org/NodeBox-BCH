@@ -537,18 +537,18 @@ try{
     
     let balanceUsd = details.balance * usd;
     let totalRec = numberWithCommas((details.totalReceived * usd).toFixed(2));
-
+    let unconfirmedBalusd = numberWithCommas((details.unconfirmedBalance * usd).toFixed(2));
     //if $ is over 3 digits, add a comma  = $420,420
     balanceUsd = numberWithCommas(balanceUsd.toFixed(2));
 
     // break down details array & print to user
     socket.emit('update', 'Balance: ' + details.balance + ' BCH  ($' + balanceUsd + ' USD)');
     socket.emit('update', 'Balance in Sats: ' + numberWithCommas(details.balanceSat));
-    socket.emit('update', '*Unconfirmed Balance: ' + details.unconfirmedBalance + ' BCH');
+    socket.emit('update', '*Unconfirmed Balance: ' + details.unconfirmedBalance + ' BCH ($' + unconfirmedBalusd + ' USD)');
     socket.emit('update', 'Unconfirmed Balance in Sats: ' + numberWithCommas(details.unconfirmedBalanceSat));
     socket.emit('update', 'Total Received: ' + details.totalReceived + ' BCH ($' + totalRec + ' USD)');
     socket.emit('update', 'Total Sats Received: ' + numberWithCommas(details.totalReceivedSat));
-	  socket.emit('update', 'Total Sent: ' + bitbox.BitcoinCash.toBitcoinCash(details.totalSentSat) + 'BCH');
+	  socket.emit('update', 'Total Sent: ' + bitbox.BitcoinCash.toBitcoinCash(details.totalSentSat) + ' BCH');
     socket.emit('update', 'Total Sats Sent: ' + numberWithCommas(details.totalSentSat));
    
    //unconfirmed balance exists, tell user we're tracking it in the background
@@ -596,6 +596,7 @@ try{
 		}
 
   }
+  return;
     //separator for each address
     //socket.emit('chat message', '');
    })()
