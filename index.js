@@ -50,34 +50,29 @@ io.on('connection', function(socket){
   socket.emit('logo', '____░__________░___________╔═╗┌─┐┬_┬┌─┐┬─┐┌─┐┌┬┐_╔╗_┬_┬______░_____________░________');
   socket.emit('logo', '___________________________╠═╝│_││││├┤_├┬┘├┤__││_╠╩╗└┬┘_________________________░___');
   socket.emit('logo', '___________________________╩__└─┘└┴┘└─┘┴└─└─┘─┴┘_╚═╝_┴______________________________');
+  socket.emit('logo', '_______________MMMMMM_____________MM___MM_____________________MMMMMM________________');
+  socket.emit('logo', '______________MMMMMM______________MMM__MMMMMMMM________________MMMMMM_______________');
+  socket.emit('logo', '______________MMMMM_______________MMMMMMMMMMMMMMM_______________MMMMM_______________');
+  socket.emit('logo', '_____________MMMMMM__________MMMMMMMMMMMMMMMMMMMM_______________MMMMMM______________');
+  socket.emit('logo', '_____________MMMMM____________MMMMMMMM_______MMMMM_______________MMMMM______________');
+  socket.emit('logo', '____________MMMMM________________MMMMM_______MMMM_________________MMMMM_____________');
+  socket.emit('logo', '____________MMMMM_________________MMMMM____MMMMMM_________________MMMMM_____________');
+  socket.emit('logo', '____________MMMMM_________________MMMMMMMMMMMMMMMMMM______________MMMMM_____________');
+  socket.emit('logo', '____________MMMMM__________________MMMMMMMMMMMMMMMMMM_____________MMMMM_____________');
+  socket.emit('logo', '____________MMMMM__________________MMMMM________MMMMM_____________MMMMM_____________');
+  socket.emit('logo', '____________MMMMM___________________MMMM________MMMMM____________MMMMMM_____________');
+  socket.emit('logo', '____________MMMMM___________________MMMMM______MMMMMM____________MMMMM______________');
+  socket.emit('logo', '_____________MMMMM__________________MMMMM____MMMMMMM_____________MMMMM______________');
+  socket.emit('logo', '_____________MMMMMM_________________MMMMMMMMMMMMMMM_____________MMMMMM______________');
+  socket.emit('logo', '______________MMMMM_______________MMMMMMMMMMMMMMM_______________MMMMM_______________');
+  socket.emit('logo', '______________MMMMMM______________MMMM__MM___MM________________MMMMMM_______________');
+  socket.emit('logo', '_______________MMMMMM___________________MMM__MMM______________MMMMMM________________');
   socket.emit('logo', '▄_•▄▄▄▄_▄▄▄_.▄▄▄·__▄▄▄▄·▪▄▄▄▄▄▄▄·_____▪__▐_▄____·▄▄▄▄▄_▄▄▄_▄▄▄_.__________▄▄▄__▄▄_•_');
   socket.emit('logo', '█▌▄▌▀▄.▀▀▄.▀▐█_▄█__▐█_▀██•██_▐█_▌▪____██•█▌▐█___▐▄▄▀▄_█▀▄.▀▀▄.▀·_____▪____▀▄_█▐█_▀_▪');
-	socket.emit('logo', '▐▀▀▄▐▀▀▪▐▀▀▪▄██▀·__▐█▀▀█▐█▐█.██_▄▄▄█▀▄▐█▐█▐▐▌___██▪▐▀▀▄▐▀▀▪▐▀▀▪▄______▄█▀▄▐▀▀▄▄█_▀█▄');
+  socket.emit('logo', '▐▀▀▄▐▀▀▪▐▀▀▪▄██▀·__▐█▀▀█▐█▐█.██_▄▄▄█▀▄▐█▐█▐▐▌___██▪▐▀▀▄▐▀▀▪▐▀▀▪▄______▄█▀▄▐▀▀▄▄█_▀█▄');
   socket.emit('logo', '▐█.█▐█▄▄▐█▄▄▐█▪·•__██▄▪▐▐█▐█▌▐███▐█▌.▐▐███▐█▌___██▌▐█•█▐█▄▄▐█▄▄▌_____▐█▌.▐▐█•█▐█▄▪▐█');
   socket.emit('logo', '·▀__▀▀▀▀_▀▀▀.▀_____·▀▀▀▀▀▀▀▀▀·▀▀▀_▀█▄▀▀▀▀▀_█▪___▀▀▀.▀__▀▀▀▀_▀▀▀___▀___▀█▄▀.▀__·▀▀▀▀_');
-  socket.emit('logo', 'MIIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIMMIIIMMIIIIIIIIIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIIM');
-  socket.emit('logo', 'MIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIMMMIIMMMMMMMMIIIIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIM');
-  socket.emit('logo', 'MIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIIMMMMMMMMMMMMMMMIIIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIM');
-  socket.emit('logo', 'MIIIIIIIIIIIIMMMMMMIIIIIIIIIIMMMMMMMMMMMMIMMMMMMMIIIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIM');
-  socket.emit('logo', 'MIIIIIIIIIIIIMMMMMIIIIIIIIIIIIMMMMMMMMIIIIIIIMMMMMIIIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIM');
-  socket.emit('logo', 'MIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIIIMMMMIIIIIIIMMMMIIIIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIM');
-  socket.emit('logo', 'MIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIIIMMMMMIIIIMMMMMMIIIIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIM');
-  socket.emit('logo', 'MIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIIIIMMMMMMMMMMMMMMMMMMIIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIM');
-  socket.emit('logo', 'MIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIIIIIMMMMMMMMMIIMMMMMMMIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIM');
-  socket.emit('logo', 'MIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIIIIIMMMMMIIIIIIIIMMMMMIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIM');
-  socket.emit('logo', 'MIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIIIIIMMMMIIIIIIIIMMMMMIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIM');
-  socket.emit('logo', 'MIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIIIIIMMMMMIIIIIIMMMMMMIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIM');
-  socket.emit('logo', 'MIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIIIIIMMMMMIIIMMMMMMMMIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIM');
-  socket.emit('logo', 'MIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIIIIMMMMMMMMMMMMMIIIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIM');
-  socket.emit('logo', 'MIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIIMMMMMMMMMMMMMIIIIIIIIIIIIIIIIIMMMMMIIIIIIIIIIIIIIM');
-  socket.emit('logo', 'MIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIMMMMIIMMIIIMMIIIIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIM');
-  socket.emit('logo', 'MIIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIIIIIIMMMIIMMMIIIIIIIIIIIIIIMMMMMMIIIIIIIIIIIIIIIM');
-
-
-
-
-
-
+  socket.emit('logo', '____________________________________________________________________________________');
 
   socket.emit('update', ' ');
   
@@ -96,31 +91,28 @@ io.on('connection', function(socket){
       setTimeout(function() {
   socket.emit('update', 'CPU: Intel(R) CPU 330 @ 40 MHz');
   }, 1200);
-        setTimeout(function() {
-  socket.emit('update', 'Speed: 40 MHz');
-  }, 1400);
 
   setTimeout(function() {
   socket.emit('update', 'PMU ROM Version: 9303');
-  }, 1600);
+  }, 1400);
 
     setTimeout(function() {
   socket.emit('update', 'NVMM ROM Version: 4.092589');
-  }, 1800);
+  }, 1600);
       setTimeout(function() {
   socket.emit('update', 'Initializing USB Controllers...');
-  }, 2000);
+  }, 1800);
         setTimeout(function() {
   socket.emit('update', 'Auto-detecting USB Mass Storage Devices...');
-  }, 2600);
+  }, 2200);
           setTimeout(function() {
   socket.emit('update', 'Booting from Hard Disk...');
-  }, 3300);
+  }, 2600);
 
   setTimeout(function() {
       socket.emit('update', 'Welcome. NodeBox is an interactive terminal utilizing Node.js, Socket.io & the BITBOX-sdk. Using NodeBox, you can view information about specific Bitcoin Cash addresses or the BCH blockchain. Enter "help" to view all available commands. All data entered is private to each socket, or current browser session.');
      // socket.emit('example', 'Nodebox is still in beta. If you find critical any errors, let us know and we may send you a reward in SLP or BCH');
-  }, 4400);
+  }, 3200);
   
 
 	// FORM SUBMIT STARTS HERE
