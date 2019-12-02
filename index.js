@@ -38,35 +38,35 @@ io.on('connection', function(socket){
 
 
   // welcome message to user on this specific socket (each browser visit is a separate socket)
-  socket.emit('logo', '███▄▄▄▄____▄██████▄__████████▄_____▄████████_▀█████████▄___▄██████▄__▀████____▐████▀');
-  socket.emit('logo', '███▀▀▀██▄_███____███_███___▀███___███____███___███____███_███____███___███▌___████▀_');
-  socket.emit('logo', '███___███_███____███_███____███___███____█▀____███____███_███____███____███__▐███___');
-  socket.emit('logo', '███___███_███____███_███____███__▄███▄▄▄______▄███▄▄▄██▀__███____███____▀███▄███▀___');
-  socket.emit('logo', '███___███_███____███_███____███_▀▀███▀▀▀_____▀▀███▀▀▀██▄__███____███____████▀██▄____');
-  socket.emit('logo', '███___███_███____███_███____███___███____█▄____███____██▄_███____███___▐███__▀███___');
-  socket.emit('logo', '███___███_███____███_███___▄███___███____███___███____███_███____███__▄███_____███▄_');
-  socket.emit('logo', '_▀█___█▀___▀██████▀__████████▀____██████████_▄█████████▀___▀██████▀__████_______███▄');
-  socket.emit('logo', '_░_░_____░_____░_░_____░______░_____________░____________░_░___░____░________░_░____');
-  socket.emit('logo', '____░__________░___________╔═╗┌─┐┬_┬┌─┐┬─┐┌─┐┌┬┐_╔╗_┬_┬______░_____________░________');
-  socket.emit('logo', '___________________________╠═╝│_││││├┤_├┬┘├┤__││_╠╩╗└┬┘_________________________░___');
-  socket.emit('logo', '___________________________╩__└─┘└┴┘└─┘┴└─└─┘─┴┘_╚═╝_┴______________________________');
-  socket.emit('logo', '_______________MMMMMM_____________MM___MM_____________________MMMMMM________________');
-  socket.emit('logo', '______________MMMMMM______________MMM__MMMMMMMM________________MMMMMM_______________');
-  socket.emit('logo', '______________MMMMM_______________MMMMMMMMMMMMMMM_______________MMMMM_______________');
-  socket.emit('logo', '_____________MMMMMM__________MMMMMMMMMMMMMMMMMMMM_______________MMMMMM______________');
-  socket.emit('logo', '_____________MMMMM____________MMMMMMMM_______MMMMM_______________MMMMM______________');
-  socket.emit('logo', '____________MMMMM________________MMMMM_______MMMM_________________MMMMM_____________');
-  socket.emit('logo', '____________MMMMM_________________MMMMM____MMMMMM_________________MMMMM_____________');
-  socket.emit('logo', '____________MMMMM_________________MMMMMMMMMMMMMMMMMM______________MMMMM_____________');
-  socket.emit('logo', '____________MMMMM__________________MMMMMMMMMMMMMMMMMM_____________MMMMM_____________');
-  socket.emit('logo', '____________MMMMM__________________MMMMM________MMMMM_____________MMMMM_____________');
-  socket.emit('logo', '____________MMMMM___________________MMMM________MMMMM____________MMMMMM_____________');
-  socket.emit('logo', '____________MMMMM___________________MMMMM______MMMMMM____________MMMMM______________');
-  socket.emit('logo', '_____________MMMMM__________________MMMMM____MMMMMMM_____________MMMMM______________');
-  socket.emit('logo', '_____________MMMMMM_________________MMMMMMMMMMMMMMM_____________MMMMMM______________');
-  socket.emit('logo', '______________MMMMM_______________MMMMMMMMMMMMMMM_______________MMMMM_______________');
-  socket.emit('logo', '______________MMMMMM______________MMMM__MM___MM________________MMMMMM_______________');
-  socket.emit('logo', '_______________MMMMMM___________________MMM__MMM______________MMMMMM________________');
+  socket.emit('logo1', '███▄▄▄▄____▄██████▄__████████▄_____▄████████_▀█████████▄___▄██████▄__▀████____▐████▀');
+  socket.emit('logo1', '███▀▀▀██▄_███____███_███___▀███___███____███___███____███_███____███___███▌___████▀_');
+  socket.emit('logo1', '███___███_███____███_███____███___███____█▀____███____███_███____███____███__▐███___');
+  socket.emit('logo1', '███___███_███____███_███____███__▄███▄▄▄______▄███▄▄▄██▀__███____███____▀███▄███▀___');
+  socket.emit('logo1', '███___███_███____███_███____███_▀▀███▀▀▀_____▀▀███▀▀▀██▄__███____███____████▀██▄____');
+  socket.emit('logo1', '███___███_███____███_███____███___███____█▄____███____██▄_███____███___▐███__▀███___');
+  socket.emit('logo1', '███___███_███____███_███___▄███___███____███___███____███_███____███__▄███_____███▄_');
+  socket.emit('logo1', '_▀█___█▀___▀██████▀__████████▀____██████████_▄█████████▀___▀██████▀__████_______███▄');
+  socket.emit('logo1', '_░_░_____░_____░_░_____░______░_____________░____________░_░___░____░________░_░____');
+  socket.emit('logo1', '____░__________░___________╔═╗┌─┐┬_┬┌─┐┬─┐┌─┐┌┬┐_╔╗_┬_┬______░_____________░________');
+  socket.emit('logo1', '___________________________╠═╝│_││││├┤_├┬┘├┤__││_╠╩╗└┬┘_________________________░___');
+  socket.emit('logo1', '___________________________╩__└─┘└┴┘└─┘┴└─└─┘─┴┘_╚═╝_┴______________________________');
+  socket.emit('logo1', '_______________MMMMMM_____________BCH___&&&___________________MMMMMM________________');
+  socket.emit('logo1', '______________MMMMMM______________&&&___BITBOXsdk______________MMMMMM_______________');
+  socket.emit('logo1', '______________MMMMM_______________NODEjs&&SOCKETio______________MMMMM_______________');
+  socket.emit('logo1', '_____________MMMMMM____________KEEPBITCOINFREE.org______________MMMMMM______________');
+  socket.emit('logo1', '_____________MMMMM____________MMMMMMMM_______MMMMM_______________MMMMM______________');
+  socket.emit('logo1', '____________MMMMM________________MMMMM_______MMMM_________________MMMMM_____________');
+  socket.emit('logo1', '____________MMMMM_________________MMMMM____MMMMMM_________________MMMMM_____________');
+  socket.emit('logo1', '____________MMMMM_________________MMMMMMMMMMMMMMMMMM______________MMMMM_____________');
+  socket.emit('logo1', '____________MMMMM__________________MMMMMMMMMMMMMMMMMM_____________MMMMM_____________');
+  socket.emit('logo1', '____________MMMMM__________________MMMMM________MMMMM_____________MMMMM_____________');
+  socket.emit('logo1', '____________MMMMM___________________MMMM________MMMMM_____________MMMMM_____________');
+  socket.emit('logo1', '____________MMMMM___________________MMMMM______MMMMMM____________MMMMMM_____________');
+  socket.emit('logo1', '_____________MMMMM__________________MMMMM____MMMMMMM_____________MMMMM______________');
+  socket.emit('logo1', '_____________MMMMM__________________MMMMMMMMMMMMMMM_____________MMMMMM______________');
+  socket.emit('logo1', '______________MMMMM_______________MMMMMMMMMMMMMMM_______________MMMMM_______________');
+  socket.emit('logo1', '______________MMMMMM______________MMMMMMMM___MM________________MMMMMM_______________');
+  socket.emit('logo1', '_______________MMMMMM___________________MMM__MMM______________MMMMMM________________');
   socket.emit('logo', '▄_•▄▄▄▄_▄▄▄_.▄▄▄·__▄▄▄▄·▪▄▄▄▄▄▄▄·_____▪__▐_▄____·▄▄▄▄▄_▄▄▄_▄▄▄_.__________▄▄▄__▄▄_•_');
   socket.emit('logo', '█▌▄▌▀▄.▀▀▄.▀▐█_▄█__▐█_▀██•██_▐█_▌▪____██•█▌▐█___▐▄▄▀▄_█▀▄.▀▀▄.▀·_____▪____▀▄_█▐█_▀_▪');
   socket.emit('logo', '▐▀▀▄▐▀▀▪▐▀▀▪▄██▀·__▐█▀▀█▐█▐█.██_▄▄▄█▀▄▐█▐█▐▐▌___██▪▐▀▀▄▐▀▀▪▐▀▀▪▄______▄█▀▄▐▀▀▄▄█_▀█▄');
@@ -74,7 +74,39 @@ io.on('connection', function(socket){
   socket.emit('logo', '·▀__▀▀▀▀_▀▀▀.▀_____·▀▀▀▀▀▀▀▀▀·▀▀▀_▀█▄▀▀▀▀▀_█▪___▀▀▀.▀__▀▀▀▀_▀▀▀___▀___▀█▄▀.▀__·▀▀▀▀_');
   socket.emit('logo', '____________________________________________________________________________________');
 
-  socket.emit('update', ' ');
+
+
+//MMMMMMMMIIIIIIIIIIIIIIIIIIIIIIIIIMMIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMMIIIIIIIIII
+//MMMMMMMIIIIIIIIIIIIIIIIIIIIMIIIIMMMMIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMMIIIIIIIII
+//MMMMMMIIIIIIIIIIIIIIIIIIIMMMMIIIMMMMIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMMIIIIIIII
+//MMMMMIIIIIIIIIIIIIIIIIIIIMMMMIIIIMMMMIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMMIIIIIII
+//MMMMIIIIIIIIIIIIIIIIIIIIIMMMMMIIIMMMMMMMMMMMMIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMIIIIIII
+//MMMMIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMMMMMMMMMMMMMMIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMIIIIII
+//MMMIIIIIIIIIIIIIIIIIIIIMMMMMMMMMMMMMMMMMMMMMMMMMIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMIIIIII
+//MMIIIIIIIIIIIIIIIIMMMMMMMMMMMMMMMMMIIIIMMMMMMMMMIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMIIIII
+//MMIIIIIIIIIIIIIIIIIMMMMMMMMMMMMIIIIIIIIIIMMMMMMMMIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMIIIII
+//MIIIIIIIIIIIIIIIIIIMMIIIMMMMMMMIIIIIIIIIIIMMMMMMMIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMIIII
+//MIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMIIIIIIIIIMMMMMMMIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMIIII
+//MIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMIIIIIIIIMMMMMMMIIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMIIII
+//MIIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMIIIIMMMMMMMMMMMMMMIIIIIIIIIIIIIIIIIIIIIIMMMMMMMIIII
+//IIIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMMMMMMMMMMMMMMMMMMMMIIIIIIIIIIIIIIIIIIIIMMMMMMMIIII
+//IIIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMMMMMMMMMMMMMMMMMMMMMIIIIIIIIIIIIIIIIIIIMMMMMMMMIII
+//IIIIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMIIIIIIIIIIMMMMMMMMMIIIIIIIIIIIIIIIIIIIMMMMMMMMIII
+//IIIIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMIIIIIIIIIIIIMMMMMMMMIIIIIIIIIIIIIIIIIIIMMMMMMMIIII
+//MIIIIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMIIIIIIIIIIIMMMMMMMMIIIIIIIIIIIIIIIIIIIMMMMMMMIIII
+//MIIIIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMIIIIIIIIIIIMMMMMMMMIIIIIIIIIIIIIIIIIIMMMMMMMMIIII
+//MIIIIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMIIIIIIIIIMMMMMMMMMIIIIIIIIIIIIIIIIIIIMMMMMMMMIIII
+//MIIIIIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMIIIIIMMMMMMMMMMMIIIIIIIIIIIIIIIIIIIIMMMMMMMMIIII
+//MMIIIIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMMMMMMMMMMMMMMIIIIIIIIIIIIIIIIIIIIIMMMMMMMMIIIII
+//MMIIIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMMMMMMMMMMMMIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMIIIII
+//MMMIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMMMMMMMMMMMMIIIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMIIIIII
+//MMMMIIIIIIIIIIIIIIIIIIIIIMMMMMMMMMMMMIIIIMMMMIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMMIIIIII
+//MMMMIIIIIIIIIIIIIIIIIIIIIMMMMIIIIIMMMMIIIMMMMIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMIIIIIII
+//MMMMMIIIIIIIIIIIIIIIIIIIIIIIIIIIIIMMMMIIIIMMMMIIIIIIIIIIIIIIIIIIIIIIMMMMMMMMMIIIIIII
+
+
+
+ // socket.emit('update', ' ');
   
   // INTRO OF OLD SCHOOL COMPUTER BOOTING UP
 
@@ -173,11 +205,11 @@ io.on('connection', function(socket){
     var msgInsideParen = regExp.exec(msglow);
     //msgInsideParen[1] gives you what is inside the parenthesis
 
-    msgSatArray = msglow.split('(');
+    msgParArray = msglow.split('(');
 
-  if( msgSatArray.length > 1) {
+  if( msgParArray.length > 1) {
     //toSatoshi()
-    if (msgSatArray[0] == 'tosatoshi') {
+    if (msgParArray[0] == 'tosatoshi') {
       // convert user entered $BCH to satoshis
       let toSatoshi = bitbox.BitcoinCash.toSatoshi(msgInsideParen[1]);
       // 9 = 900000000
@@ -186,14 +218,14 @@ io.on('connection', function(socket){
 
 
     //toBitcoinCash()
-    if (msgSatArray[0] == 'tobitcoincash') {
+    if (msgParArray[0] == 'tobitcoincash') {
         //convert user entered satoshis to $BCH
         let toBitcoinCash = bitbox.BitcoinCash.toBitcoinCash(msgInsideParen[1]);
         socket.emit('update', msgInsideParen[1] + ' Satoshis converted to BCH: ' + toBitcoinCash);
     }
 
     //utxo(BCH_ADDRESS)
-    if (msgSatArray[0] == 'utxo') {
+    if (msgParArray[0] == 'utxo') {
         // get all utxos for an address
         (async () => {
         try {
@@ -207,12 +239,48 @@ io.on('connection', function(socket){
          }
         })()
     }
+
+    //create seed buffer from passed mnemonic seed
+if(msgParArray[0] == 'createseedbuffer'){
+  console.log(msgInsideParen);
+  if (msgInsideParen != null){
+    // create seed buffer from mnemonic
+
+    let mnemonic = bitbox.Mnemonic.generate(128);
+
+    let seedBuffer = bitbox.Mnemonic.toSeed(mnemonic);
+    console.log('seedBuffer: ' + seedBuffer);
+ //   socket.emit('update', 'SeedBuffer: '); // socket.emit('udpate', seedBuffer);
+    return;
+  }else{
+    socket.emit('update', 'Error: You must first create a mnemonic to create a Seed Buffer from it.');
+    return;
+  }
+}
+
+
+
+
+
+
+
+
+
+  //end of if msgarray > 1 try block
     return;
   }
 
+  //end of msgarray > 1 try block
   }catch(error){
     console.log(error);
   }
+
+
+
+
+
+
+
 
   // TRY BLOCK FOR COMMANDS WITH commas , 
   // SIGN module: if there are commas present in the msg & the first word is 'sign' then try to sign a message with PrivateKeyWIF
@@ -450,6 +518,8 @@ try{
   }catch(error){
     console.log(error);
   }
+
+
 
     // IF msg doesn't match anything else, let's check the 
     //ADDRESS DETAILS: using BITBOX to hit API and get info for BCH address.
