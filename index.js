@@ -173,7 +173,7 @@ io.on('connection', function(socket){
      socket.emit('update', 'CurrentBlockTx: ' + getMiningInfo.currentblocktx);
      socket.emit('update', 'Difficulty: ' + numberWithCommas(getMiningInfo.difficulty.toFixed(2)));
      socket.emit('update', 'Block Priority Percentage: %' + getMiningInfo.blockprioritypercentage);
-     socket.emit('update', 'Networkhashps: ' + getMiningInfo.networkhashps);
+     socket.emit('update', 'Networkhashps: ' + numberWithCommas(getMiningInfo.networkhashps));
      socket.emit('update', 'PooledTx: ' + getMiningInfo.pooledtx);
      socket.emit('update', 'Chain: ' +  getMiningInfo.chain);
     } catch(error) {
@@ -213,7 +213,7 @@ io.on('connection', function(socket){
       // convert user entered $BCH to satoshis
       let toSatoshi = bitbox.BitcoinCash.toSatoshi(msgInsideParen[1]);
       // 9 = 900000000
-      socket.emit('update', msgInsideParen[1] + ' BCH converted to Satoshis: ' + toSatoshi);
+      socket.emit('update', msgInsideParen[1] + ' BCH converted to Satoshis: ' + numberWithCommas(toSatoshi));
     }
 
 
@@ -221,6 +221,9 @@ io.on('connection', function(socket){
     if (msgParArray[0] == 'tobitcoincash') {
         //convert user entered satoshis to $BCH
         let toBitcoinCash = bitbox.BitcoinCash.toBitcoinCash(msgInsideParen[1]);
+
+        //TODO: add in price details of BCH
+
         socket.emit('update', msgInsideParen[1] + ' Satoshis converted to BCH: ' + toBitcoinCash);
     }
 
@@ -400,9 +403,9 @@ if(msgParArray[0] == 'createseedbuffer'){
       socket.emit('update', 'Enter "getMiningInfo" to return mining-related information.');
       socket.emit('update', 'Enter utxo(BCH_ADDRESS) to return a list of utxos for a legacy or cash address.');
       socket.emit('update', 'Enter "encryptBIP38, PRIVATEKEYWIF, PASSWORD" to encrypt privkey WIFs with BIP39.');
-      socket.emit('example', 'encryptBIP38, L1phBREbhL4vb1uHHHCAse8bdGE5c7ic2PFjRxMawLzQCsiFVbvu, 9GKVkabAHBMyAf.');
+      socket.emit('example', 'encryptBIP38, L1phBREbhL4vb1uHHHCAse8bdGE5c7ic2PFjRxMawLzQCsiFVbvu, 9GKVkabAHBMyAf');
       socket.emit('update', 'Enter "decryptBIP38, encryptedPRIVATEKEYWIF, PASSWORD" to decrypt with, network.');
-      socket.emit('example', 'decryptBIP38, 6PYU2fDHRYfsKawL4KYornRFgimHnEovxU4VcgDaVtsVuuzQEfWDYwBQLd, Password123, mainnet.');
+      socket.emit('example', 'decryptBIP38, 6PYU2fDHRYfsKawL4KYornRFgimHnEovxU4VcgDaVtsVuuzQEfWDYwBQLd, Password123, mainnet');
       socket.emit('update', 'Enter "sign, PRIVATEKEYWIF, MESSAGE" to sign a message with a private key.');
       socket.emit('example', 'sign, KxtpRDUJDiutLaTV8Vuavhb6h7zq9YV9ZKA3dU79PCgYmNVmkkvS, Bitcoin Cash is Bitcoin');
       socket.emit('update', 'Enter "verify, BCH_ADDRESS, SIGNATURE, MESSAGE" to verify a signed message.');
@@ -525,8 +528,10 @@ try{
     //ADDRESS DETAILS: using BITBOX to hit API and get info for BCH address.
     // async function to get all details of BCH address
   
+ 
+
   try {
-   
+
    //TODO: move price grab outside of address balance details to use elsewhere in price(amount of BCH) ie. create a function for pricegrab.
   (async () => {
     // use BITBOX to get details of BCH address submitted by user
@@ -584,9 +589,9 @@ try{
 			if (details.unconfirmedBalance == 0){
 				socket.emit('chat message', 'Unconfirmed Balance for ' + msg + ' has been confirmed!');
 
-      //socket.emit('logo', '_╔╗_┌─┐┬__┌─┐┌┐┌┌─┐┌─┐__┬_┬┌─┐┌─┐__┌┐_┌─┐┌─┐┌┐┌__╔═╗╔═╗╔╗╔╔═╗╦╦═╗╔╦╗╔═╗╔╦╗┬');
-      //socket.emit('logo', '_╠╩╗├─┤│__├─┤││││__├┤___├─┤├─┤└─┐__├┴┐├┤_├┤_│││__║__║_║║║║╠╣_║╠╦╝║║║║╣__║║│');
-      //socket.emit('logo', '_╚═╝┴_┴┴─┘┴_┴┘└┘└─┘└─┘__┴_┴┴_┴└─┘__└─┘└─┘└─┘┘└┘__╚═╝╚═╝╝╚╝╚__╩╩╚═╩_╩╚═╝═╩╝o');
+      socket.emit('logo', '_╔╗_┌─┐┬__┌─┐┌┐┌┌─┐┌─┐__┬_┬┌─┐┌─┐__┌┐_┌─┐┌─┐┌┐┌__╔═╗╔═╗╔╗╔╔═╗╦╦═╗╔╦╗╔═╗╔╦╗┬');
+      socket.emit('logo', '_╠╩╗├─┤│__├─┤││││__├┤___├─┤├─┤└─┐__├┴┐├┤_├┤_│││__║__║_║║║║╠╣_║╠╦╝║║║║╣__║║│');
+      socket.emit('logo', '_╚═╝┴_┴┴─┘┴_┴┘└┘└─┘└─┘__┴_┴┴_┴└─┘__└─┘└─┘└─┘┘└┘__╚═╝╚═╝╝╚╝╚__╩╩╚═╩_╩╚═╝═╩╝o');
 
 
         // TODO: real deal alert user funds have confirmed (needs to be done on client side): window.alert('Unconfirmed Balance has been confirmed!');
@@ -600,12 +605,15 @@ try{
     //separator for each address
     //socket.emit('chat message', '');
    })()
+//end of IF isLegacy or isCashAddr
 
+  //end of try block, catch & send back error
   } catch(error) {
   // catch error for details array and print only to console if it fails
    console.error(error)
   }
     
+
   // bitcoincash:qzm47qz5ue99y9yl4aca7jnz7dwgdenl85jkfx3znl
 
   // debug: console.log('********* User entered: ' + msg + ' :deretne resU *********');
