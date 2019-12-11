@@ -5,15 +5,23 @@ var port = process.env.PORT || 8088;
 
 // require syntax for BCH BITBOX
 let BITBOX = require('bitbox-sdk').BITBOX;
-let bitbox = new BITBOX();
+let bitbox = new BITBOX({ restURL: 'https://rest.bitcoin.com/v2/' });
 //let mnemonic = bitbox.Mnemonic.generate();
-//console.log('Mnemonic: ', mnemonic);
+
+//const BITBOXSDK = require('bitbox-sdk')
+
+let SLPSDK = require('slp-sdk');
+let SLP = new SLPSDK();
+
+//const slpjs = require('slpjs');
+//const bitboxNetwork = new slpjs.BitboxNetwork(bitbox);
 
 // formatting for numbers: if any # requires commas, this does it. thanks to Lloyd Banks
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+// SERVES PAGE WHEN REQ IS RECIEVED, SENDS BACK RESPONSE
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
@@ -27,14 +35,6 @@ app.get('/', function(req, res){
 // NEW USER CONNECTED HERE
 io.on('connection', function(socket){
   
-//#  ┌─┐┌─┐┬_┬┌─┐┬─┐┌─┐┌┬┐__┌┐_┬_┬
-//#  ├─┘│_││││├┤_├┬┘├┤__││__├┴┐└┬┘
-//#  ┴__└─┘└┴┘└─┘┴└─└─┘─┴┘__└─┘_┴_
-
-
-//╔═╗┌─┐┬_┬┌─┐┬─┐┌─┐┌┬┐_╔╗_┬_┬_
-//╠═╝│_││││├┤_├┬┘├┤__││_╠╩╗└┬┘_
-//╩__└─┘└┴┘└─┘┴└─└─┘─┴┘_╚═╝_┴
 
 
   // welcome message to user on this specific socket (each browser visit is a separate socket)
@@ -393,7 +393,7 @@ if(msgParArray[0] == 'createseedbuffer'){
   try{
     // debug: console.log('checking if msg qualifies for help module');
     if (msglow == 'help'){
-      socket.emit('update', 'Enter a BCH address in Legacy or CashAddr format to display the latest info about that address. If an unconfirmed balance is detected for that address, the system will track it until it is confirmed.');
+      socket.emit('update', 'Enter a BCH address in Legacy, Cashaddr or simpleledger format to display the latest info about that address. If an unconfirmed balance is detected for that address, the system will track it until it is confirmed.');
       socket.emit('update', 'Enter "getBlockchainInfo" to return the latest info regarding the BCH Blockchain.');
       socket.emit('update', 'Enter "getBlockCount" to return the latest number of blocks in the longest Blockchain.');
       socket.emit('update', 'Enter "getDifficulty" to return the proof-of-work difficulty as a multiple of the minimum difficulty.');
@@ -621,6 +621,155 @@ try{
   //CONVERT BCH ADDRESS: detects address type & converts to the other, prints both.
   try{
 
+    //check for SLP address.
+    // Install BITBOX-SDK v8.1+ for blockchain access
+  // For more information visit: https://www.npmjs.com/package/bitbox-sdk
+msgColonArray = msg.split(':');
+
+
+
+  if (SLP.Address.isSLPAddress(msg)) {
+    //msgColonArray[0].toLowerCase() == 'simpleledger' ) {
+    socket.emit('update', 'You have entered an SLP Token address (simpleledger):');
+    socket.emit('update', msg);
+   // cashAddr = bitbox.Address.toCashAddress(msg);
+  //  socket.emit('update', 'CashAddr: ' + cashAddr);
+
+
+  //check for unconfirmed funds on SLP addy
+ // (async () => {
+ // try {
+ //   let unconfirmed = await SLP.Address.unconfirmed([msg]);
+ //   console.log(unconfirmed);
+
+    //  unconfirmed.forEach(function(value){
+
+  //      console.log(value.name);
+//        console.log(value);
+  //    });
+
+  //} catch(error) {
+ //  console.error(error)
+ // }
+
+    
+    //end check for unconfirmed funds
+  //  })();
+
+
+  
+    //get TOKEN BALANCES of SLP address: (NOT WORKING)
+
+    (async () => {
+  try {
+    console.log(msg);
+    let balances = await SLP.Utils.balancesForAddress(msg);
+    console.log(balances.length);
+
+    console.log('starting balances.forEach');
+    balances.forEach(function(token){
+
+
+    socket.emit('update', 'Token ID: ' + token.tokenId);
+    socket.emit('update', 'Token Balance: ' + token.balance);
+    socket.emit('update', 'Decimal Count: ' + token.decimalCount);
+    socket.emit('update', '_______________________________');
+
+    //socket.emit('update', '*Unconfirmed Balance: ' + details.unconfirmedBalance + ' BCH ($' + unconfirmedBalusd + ' USD)');
+    //socket.emit('update', 'Unconfirmed Balance in Sats: ' + numberWithCommas(details.unconfirmedBalanceSat));
+    //socket.emit('update', 'Total Received: ' + details.totalReceived + ' BCH ($' + totalRec + ' USD)');
+    //socket.emit('update', 'Total Sats Received: ' + numberWithCommas(details.totalReceivedSat));
+    //socket.emit('update', 'Total Sent: ' + bitbox.BitcoinCash.toBitcoinCash(details.totalSentSat) + ' BCH');
+    //socket.emit('update', 'Total Sats Sent: ' + numberWithCommas(details.totalSentSat));
+
+    });
+
+  } catch (error) {
+    console.log(error);
+  }
+})();
+
+
+
+
+  // GET DETAILS OF TOKENS BY ID, PASS IN ARRAY OF TOKENS
+  (async () => {
+    try {
+      let list = await SLP.Utils.list([
+        "fa6c74c52450fc164e17402a46645ce494a8a8e93b1383fa27460086931ef59f",
+        "38e97c5d7d3585a2cbf3f9580c82ca33985f9cb0845d4dcce220cb709f9538b0"
+      ]);
+      console.log(list);
+    } catch (error) {
+      console.error(error);
+    }
+  })();
+
+
+
+
+
+    return;
+  }
+
+
+
+
+
+
+
+// {
+//   "utxos": [
+//     {
+//       "address": "1BFHGm4HzqgXXyNX8n7DsQno5DAC4iLMRA",
+//       "txid": "5ddf277cecefab4bb75fb5d6ba21170cec756ef28a045cb4ec45ccffda28cdaf",
+//       "vout": 0,
+//       "scriptPubKey": "76a914bcbc83f8fadb704a6aeccf38079e428da445b11e88ac",
+//       "amount": 0.0001,
+//       "satoshis": 10000,
+//       "confirmations": 0,
+//       "ts": 1547670883
+//     }
+//   ],
+//   "legacyAddress": "1BFHGm4HzqgXXyNX8n7DsQno5DAC4iLMRA",
+//   "cashAddress": "simpleledger:qpcxf2sv9hjw08nvpgffpamfus9nmksm3cmhle4tdu"
+// }
+
+
+// RETURNS ALL BALANCES & UTXOs: 
+
+// { satoshis_available_bch: 190889,
+//   satoshis_locked_in_slp_baton: 546,
+//   satoshis_locked_in_slp_token: 1092,
+//   satoshis_in_invalid_token_dag: 0,
+//   satoshis_in_invalid_baton_dag: 0,
+//   slpTokenBalances: {
+//      '1cda254d0a995c713b7955298ed246822bee487458cd9747a91d9e81d9d28125': BigNumber { s: 1, e: 3, c: [ 1000 ] },
+//      '047918c612e94cce03876f1ad2bd6c9da43b586026811d9b0d02c3c3e910f972': BigNumber { s: 1, e: 2, c: [ 100 ] } 
+//   },
+//   nftParentChildBalances: {
+//      'parentId1': {
+//            'childId1': BigNumber
+//            'childId2': BigNumber
+//      }
+//      'parentId2': {
+//            'childId1': BigNumber
+//            'childId2': BigNumber
+//      }
+//   }
+//   slpTokenUtxos: [ ... ],
+//   slpBatonUtxos: [ ... ],
+//   invalidTokenUtxos: [ ... ],
+//   invalidBatonUtxos: [ ... ],
+//   nonSlpUtxos: [ ... ]
+//   unknownTokenTypeUtxos: [ ... ]
+// }
+
+
+
+
+
+
     	if ( bitbox.Address.isLegacyAddress(msg) == true) {
     		//print original address
     		socket.emit('update', 'Legacy: ' + msg);
@@ -640,12 +789,12 @@ try{
         // mainnet w/ prefix
         legacy = bitbox.Address.toLegacyAddress(msg);
         // mainnet w/ prefix
-        cashAddr = bitbox.Address.toCashAddress(msg);
+        //cashAddr = bitbox.Address.toCashAddress(msg);
         // get/set the details before we continue with output
         network = bitbox.Address.detectAddressNetwork(msg);
 
     	  // print addresses
-        socket.emit('update', 'CashAddr: ' + cashAddr);
+        socket.emit('update', 'CashAddr: ' + msg);
   			socket.emit('update', 'Legacy: ' + legacy);
   			socket.emit('update', 'Network: ' + network);
   			return;

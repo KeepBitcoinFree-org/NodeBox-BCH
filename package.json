@@ -5,6 +5,7 @@
   "dependencies": {
     "bitbox-sdk": "^8.8.1",
     "express": "^4.15.2",
+    "slp-sdk": "^4.13.1",
     "socket.io": "^1.7.3"
   },
   "scripts": {
