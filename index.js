@@ -3,18 +3,20 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 8088;
 
-// require syntax for BCH BITBOX
-let BITBOX = require('bitbox-sdk').BITBOX;
-let bitbox = new BITBOX({ restURL: 'https://rest.bitcoin.com/v2/' });
+// require syntax for BCHjs by Permissionless Software Foundation psfoundation.cash fullstack.cash 
+// FULLSTACK.CASH in the house. Big thanks to Troutner & PermissionlessSoftwareFoundation (PSF)
+// const TOKENID = "6448381f9649ecacd8c30189cfbfee71a91b6b9738ea494fe33f8b8b51cbfca0"
+
+// REST API servers.
+const BCHN_MAINNET = 'https://bchn.fullstack.cash/v5/'
+
+// bch-js-examples require code from the main bch-js repo
+const BCHJS = require('@psf/bch-js')
+
+// Instantiate bch-js based on the network.
+const bchjs = new BCHJS({ restURL: BCHN_MAINNET })
+
 //let mnemonic = bitbox.Mnemonic.generate();
-
-//const BITBOXSDK = require('bitbox-sdk')
-
-let SLPSDK = require('slp-sdk');
-let SLP = new SLPSDK();
-
-//const slpjs = require('slpjs');
-//const bitboxNetwork = new slpjs.BitboxNetwork(bitbox);
 
 // formatting for numbers: if any # requires commas, this does it. thanks to Lloyd Banks
 function numberWithCommas(x) {
@@ -50,23 +52,23 @@ io.on('connection', function(socket){
   socket.emit('logo1', '____░__________░___________╔═╗┌─┐┬_┬┌─┐┬─┐┌─┐┌┬┐_╔╗_┬_┬______░_____________░________');
   socket.emit('logo1', '___________________________╠═╝│_││││├┤_├┬┘├┤__││_╠╩╗└┬┘_________________________░___');
   socket.emit('logo1', '___________________________╩__└─┘└┴┘└─┘┴└─└─┘─┴┘_╚═╝_┴______________________________');
-  socket.emit('logo', '_______________MMMMMM_____________BCH___&&&___________________MMMMMM________________');
-  socket.emit('logo', '______________MMMMMM______________&&&___BITBOXsdk______________MMMMMM_______________');
-  socket.emit('logo', '______________MMMMM_______________NODEjs&&SOCKETio______________MMMMM_______________');
-  socket.emit('logo', '_____________MMMMMM____________KEEPBITCOINFREE.org______________MMMMMM______________');
-  socket.emit('logo', '_____________MMMMM____________MMMMMMMM_______MMMMM_______________MMMMM______________');
-  socket.emit('logo', '____________MMMMM________________MMMMM_______MMMM_________________MMMMM_____________');
-  socket.emit('logo', '____________MMMMM_________________MMMMM____MMMMMM_________________MMMMM_____________');
-  socket.emit('logo', '____________MMMMM_________________MMMMMMMMMMMMMMMMMM______________MMMMM_____________');
-  socket.emit('logo', '____________MMMMM__________________MMMMMMMMMMMMMMMMMM_____________MMMMM_____________');
-  socket.emit('logo', '____________MMMMM__________________MMMMM________MMMMM_____________MMMMM_____________');
-  socket.emit('logo', '____________MMMMM___________________MMMM________MMMMM_____________MMMMM_____________');
-  socket.emit('logo', '____________MMMMM___________________MMMMM______MMMMMM____________MMMMMM_____________');
-  socket.emit('logo', '_____________MMMMM__________________MMMMM____MMMMMMM_____________MMMMM______________');
-  socket.emit('logo', '_____________MMMMM__________________MMMMMMMMMMMMMMM_____________MMMMMM______________');
-  socket.emit('logo', '______________MMMMM_______________MMMMMMMMMMMMMMM_______________MMMMM_______________');
-  socket.emit('logo', '______________MMMMMM______________MMMMMMMM___MM________________MMMMMM_______________');
-  socket.emit('logo', '_______________MMMMMM___________________MMM__MMM______________MMMMMM________________');
+  socket.emit('logo', '_______________XXXXXX_____________BCH___XXX___________________XXXXXX________________');
+  socket.emit('logo', '______________XXXXXX______________XXX___BITCOINCASH____________XXXXXX_______________');
+  socket.emit('logo', '______________XXXXX_______________NODEjs&&SOCKETio______________XXXXX_______________');
+  socket.emit('logo', '_____________XXXXXX____________KEEPBITCOINFREE.org______________XXXXXX______________');
+  socket.emit('logo', '_____________XXXXX____________XXXXXXXX_______XXXXX_______________XXXXX______________');
+  socket.emit('logo', '____________XXXXX________________XXXXX_______XXXX_________________XXXXX_____________');
+  socket.emit('logo', '____________XXXXX_________________XXXXX____XXXXXX_________________XXXXX_____________');
+  socket.emit('logo', '____________XXXXX_________________XXXXXXXXXXXXXXXXXX______________XXXXX_____________');
+  socket.emit('logo', '____________XXXXX__________________XXXXXXXXXXXXXXXXXX_____________XXXXX_____________');
+  socket.emit('logo', '____________XXXXX__________________XXXXX________XXXXX_____________XXXXX_____________');
+  socket.emit('logo', '____________XXXXX___________________XXXX________XXXXX_____________XXXXX_____________');
+  socket.emit('logo', '____________XXXXX___________________XXXXX______XXXXXX____________XXXXXX_____________');
+  socket.emit('logo', '_____________XXXXX__________________XXXXX____XXXXXXX_____________XXXXX______________');
+  socket.emit('logo', '_____________XXXXX__________________XXXXXXXXXXXXXXX_____________XXXXXX______________');
+  socket.emit('logo', '______________XXXXX_______________XXXXXXXXXXXXXXX_______________XXXXX_______________');
+  socket.emit('logo', '______________XXXXXX______________XXXXXXXX___XX________________XXXXXX_______________');
+  socket.emit('logo', '_______________XXXXXX___________________XXX__XXX______________XXXXXX________________');
   socket.emit('logo', '▄_•▄▄▄▄_▄▄▄_.▄▄▄·__▄▄▄▄·▪▄▄▄▄▄▄▄·_____▪__▐_▄____·▄▄▄▄▄_▄▄▄_▄▄▄_.__________▄▄▄__▄▄_•_');
   socket.emit('logo', '█▌▄▌▀▄.▀▀▄.▀▐█_▄█__▐█_▀██•██_▐█_▌▪____██•█▌▐█___▐▄▄▀▄_█▀▄.▀▀▄.▀·_____▪____▀▄_█▐█_▀_▪');
   socket.emit('logo', '▐▀▀▄▐▀▀▪▐▀▀▪▄██▀·__▐█▀▀█▐█▐█.██_▄▄▄█▀▄▐█▐█▐▐▌___██▪▐▀▀▄▐▀▀▪▐▀▀▪▄______▄█▀▄▐▀▀▄▄█_▀█▄');
@@ -142,7 +144,7 @@ io.on('connection', function(socket){
   }, 2800);
 
   setTimeout(function() {
-      socket.emit('update', 'Welcome. NodeBox is an interactive terminal utilizing Node.js, Socket.io & the BITBOX-sdk. Using NodeBox, you can view information about specific Bitcoin Cash addresses or the BCH blockchain. Enter "help" to view all available commands. All data entered is private to each socket, or current browser session.');
+      socket.emit('update', 'Welcome. NodeBox is an interactive terminal utilizing Node.js, Socket.io & BCH-JS. Using NodeBox, you can view information about specific Bitcoin Cash addresses or the BCH blockchain. Enter "help" to view all available commands. All data entered is private to each socket, or current browser session.');
      // socket.emit('example', 'Nodebox is still in beta. If you find critical any errors, let us know and we may send you a reward in SLP or BCH');
   }, 3600);
   
@@ -166,16 +168,16 @@ io.on('connection', function(socket){
   if (msglow == 'getmininginfo'){
     (async () => {
     try {
-     let getMiningInfo = await bitbox.Mining.getMiningInfo();
+     let getMiningInfo = await bchjs.Blockchain.getBlockchainInfo();
      //console.log(getMiningInfo);
      socket.emit('update', 'Blocks: ' + getMiningInfo.blocks);
-     socket.emit('update', 'CurrentBlocksize: ' + getMiningInfo.currentblocksize);
-     socket.emit('update', 'CurrentBlockTx: ' + getMiningInfo.currentblocktx);
-     socket.emit('update', 'Difficulty: ' + numberWithCommas(getMiningInfo.difficulty.toFixed(2)));
-     socket.emit('update', 'Block Priority Percentage: %' + getMiningInfo.blockprioritypercentage);
-     socket.emit('update', 'Networkhashps: ' + numberWithCommas(getMiningInfo.networkhashps));
-     socket.emit('update', 'PooledTx: ' + getMiningInfo.pooledtx);
-     socket.emit('update', 'Chain: ' +  getMiningInfo.chain);
+     socket.emit('update', 'Headers: ' + getMiningInfo.headers);
+     socket.emit('update', 'Best Block Hash: ' + getMiningInfo.bestblockhash);
+     socket.emit('update', 'Difficulty: ' + numberWithCommas(getMiningInfo.difficulty));
+     socket.emit('update', 'Median Time: ' + numberWithCommas(getMiningInfo.mediantime));
+     socket.emit('update', 'Verification Percentage: %' + getMiningInfo.verificationprogress);
+     // socket.emit('update', 'PooledTx: ' + getMiningInfo.pooledtx);
+     // socket.emit('update', 'Chain: ' +  getMiningInfo.chain);
     } catch(error) {
      console.error(error)
       } 
@@ -187,7 +189,7 @@ io.on('connection', function(socket){
   if (msglow == 'donate'){
     // add bitcoincash text donation address. client site returns QR code.
    socket.emit('update', 'Donate BCH to KeepBitcoinFree.org:');
-   socket.emit('example', 'bitcoincash:qpphskv6mgh62teqjhumsnr6xxqqux9t7cfw9n4rmr');
+   socket.emit('example', 'bitcoincash:qzjzgvrm7zh54rrt5jlht5mcxra0wz70s5j6mdd38a');
    return;
   }
 
@@ -211,7 +213,7 @@ io.on('connection', function(socket){
     //toSatoshi()
     if (msgParArray[0] == 'tosatoshi') {
       // convert user entered $BCH to satoshis
-      let toSatoshi = bitbox.BitcoinCash.toSatoshi(msgInsideParen[1]);
+      let toSatoshi = bchjs.BitcoinCash.toSatoshi(msgInsideParen[1]);
       // 9 = 900000000
       socket.emit('update', msgInsideParen[1] + ' BCH converted to Satoshis: ' + numberWithCommas(toSatoshi));
     }
@@ -220,7 +222,7 @@ io.on('connection', function(socket){
     //toBitcoinCash()
     if (msgParArray[0] == 'tobitcoincash') {
         //convert user entered satoshis to $BCH
-        let toBitcoinCash = bitbox.BitcoinCash.toBitcoinCash(msgInsideParen[1]);
+        let toBitcoinCash = bchjs.BitcoinCash.toBitcoinCash(msgInsideParen[1]);
 
         //TODO: add in price details of BCH
 
@@ -232,7 +234,7 @@ io.on('connection', function(socket){
         // get all utxos for an address
         (async () => {
         try {
-          let utxo = await bitbox.Address.utxo('1M1FYu4zuVaxRPWLZG5CnP8qQrZaqu6c2L');
+          let utxo = await bchjs.Address.utxo(msgInsideParen[1]);
           //console.log(utxo);
           //TODO: break this out or build for loop to print each obj in array.
           socket.emit('update', JSON.stringify(utxo));
@@ -249,9 +251,9 @@ if(msgParArray[0] == 'createseedbuffer'){
   if (msgInsideParen != null){
     // create seed buffer from mnemonic
 
-    let mnemonic = bitbox.Mnemonic.generate(128);
+    let mnemonic = bchjs.Mnemonic.generate(128);
 
-    let seedBuffer = bitbox.Mnemonic.toSeed(mnemonic);
+    let seedBuffer = bchjs.Mnemonic.toSeed(mnemonic);
     console.log('seedBuffer: ' + seedBuffer);
  //   socket.emit('update', 'SeedBuffer: '); // socket.emit('udpate', seedBuffer);
     return;
@@ -304,7 +306,7 @@ if(msgParArray[0] == 'createseedbuffer'){
 
       // check if sign is called
       if (msgArray[0] == 'sign'){
-        let signedMessage = bitbox.BitcoinCash.signMessageWithPrivKey(msgArray[1], msgArray[2]);
+        let signedMessage = bchjs.BitcoinCash.signMessageWithPrivKey(msgArray[1], msgArray[2]);
        // console.log(signedMessage);
         socket.emit('update', 'PrivatekeyWIF: ' + msgArray[1].substring(0, 47) + '*****');
         socket.emit('update', 'Message: ' + msgArray[2]);
@@ -316,7 +318,7 @@ if(msgParArray[0] == 'createseedbuffer'){
       // check if verify is called
       if (msgArray[0] == 'verify'){
 
-        let verifyMessage = bitbox.BitcoinCash.verifyMessage(msgArray[1], msgArray[2], msgArray[3]);
+        let verifyMessage = bchjs.BitcoinCash.verifyMessage(msgArray[1], msgArray[2], msgArray[3]);
         
         if(verifyMessage == true){
           socket.emit('update', 'Message was verified as authentic by the address that signed the message & cryptographic signature provided. ');
@@ -328,21 +330,21 @@ if(msgParArray[0] == 'createseedbuffer'){
       // TODO: FINISH BIP21encoded
 
       // check if encodeBIP21 is called
-      if (msgArray[0] == 'encodeBIP21'){
-        // encodeBIP21 MODULE - to add options to BCH address such as amount, label & message
-        let address = '1C6hRmfzvWst5WA7bFRCVAqHt5gE2g7Qar'
-        let options = {
-          amount: 12.5,
-          label: 'coinbase donation',
-          message: "and ya don't stop",
-        }
+      // if (msgArray[0] == 'encodeBIP21'){
+      //   // encodeBIP21 MODULE - to add options to BCH address such as amount, label & message
+      //   let address = '1C6hRmfzvWst5WA7bFRCVAqHt5gE2g7Qar'
+      //   let options = {
+      //     amount: 12.5,
+      //     label: 'coinbase donation',
+      //     message: "and ya don't stop",
+      //   }
         
-        var BIP21encoded = bitbox.BitcoinCash.encodeBIP21(address, options)
-        // bitcoincash:qpum6dwnqmmysdggrprse8ccjq7ldcrfqgmmtgcmny?amount=12.5&label=coinbase%20donation&message=and%20ya%20don%27t%20stop
-        //console.log(BIP21encoded);
-        socket.emit('chat message', BIP21encoded);
+      //   var BIP21encoded = bitbox.BitcoinCash.encodeBIP21(address, options)
+      //   // bitcoincash:qpum6dwnqmmysdggrprse8ccjq7ldcrfqgmmtgcmny?amount=12.5&label=coinbase%20donation&message=and%20ya%20don%27t%20stop
+      //   //console.log(BIP21encoded);
+      //   socket.emit('chat message', BIP21encoded);
 
-      }
+      // }
 
       // encryptBIP38
       if( msgArray[0] == 'encryptBIP38') {
@@ -350,7 +352,7 @@ if(msgParArray[0] == 'createseedbuffer'){
         privKeyWIF = msgArray[1];
         pass = msgArray[2];
 
-        let encryptBIP38 = bitbox.BitcoinCash.encryptBIP38(privKeyWIF, pass);
+        let encryptBIP38 = bchjs.BitcoinCash.encryptBIP38(privKeyWIF, pass);
         socket.emit('update', 'PrivatekeyWIF: ' + privKeyWIF.substring(0, 47) + '*****');
         socket.emit('update', 'Password: ' + pass);
         socket.emit('update', 'BIP28 Encrypted PrivatekeyWIF: ' + encryptBIP38);
@@ -365,7 +367,7 @@ if(msgParArray[0] == 'createseedbuffer'){
         network = msgArray[3];
 
         // mainnet (encryptedPRIVKEY, password to decrypt with, network)
-        let decryptBIP38 = bitbox.BitcoinCash.decryptBIP38('6PYU2fDHRVF2194gKDGkbFbeu4mFgkWtVvg2RPd2Sp6KmZx3RCHFpgBB2G', '9GKVkabAHBMyAf', 'mainnet');
+        let decryptBIP38 = bchjs.BitcoinCash.decryptBIP38('6PYU2fDHRVF2194gKDGkbFbeu4mFgkWtVvg2RPd2Sp6KmZx3RCHFpgBB2G', '9GKVkabAHBMyAf', 'mainnet');
         // L1phBREbhL4vb1uHHHCAse8bdGE5c7ic2PFjRxMawLzQCsiFVbvu
 
         socket.emit('update', 'PrivatekeyWIF: ' + privKeyWIF.substring(0, 47) + '*****');
@@ -426,7 +428,7 @@ try{
       
   (async () => {
   try {
-    let getMempoolInfo = await bitbox.Blockchain.getMempoolInfo();
+    let getMempoolInfo = await bchjs.Blockchain.getMempoolInfo();
    // console.log(getMempoolInfo);
    // print entire array at once: socket.emit('array', JSON.stringify(getMempoolInfo));
     socket.emit('update', 'Size: ' + numberWithCommas(getMempoolInfo.size));
@@ -434,7 +436,7 @@ try{
     socket.emit('update', 'Usage: ' + numberWithCommas(getMempoolInfo.usage));
     socket.emit('update', 'Max Mempool: ' + numberWithCommas(getMempoolInfo.maxmempool));
     socket.emit('update', 'Mempool Min Fee: ' + getMempoolInfo.mempoolminfee + ' BCH');
-    socket.emit('update', 'Min Relay Tx Fee ' + getMempoolInfo.minrelaytxfee + ' BCH');
+   // socket.emit('update', 'Min Relay Tx Fee ' + getMempoolInfo.minrelaytxfee + ' BCH');
 
   } catch(error) {
    console.error(error)
@@ -454,7 +456,7 @@ try{
       
     (async () => {
   try {
-    let getBlockCount = await bitbox.Blockchain.getBlockCount();
+    let getBlockCount = await bchjs.Blockchain.getBlockCount();
     //console.log(getBlockCount);
     socket.emit('update', 'Bitcoin Cash Block Count: ' + numberWithCommas(getBlockCount));
   } catch(error) {
@@ -475,7 +477,7 @@ try{
       
 (async () => {
   try {
-    let getDifficulty = await bitbox.Blockchain.getDifficulty();
+    let getDifficulty = await bchjs.Blockchain.getDifficulty();
     // debug: console.log(getDifficulty);
     socket.emit('update', 'Difficulty: ' + numberWithCommas(getDifficulty.toFixed(2)));
   } catch(error) {
@@ -497,7 +499,7 @@ try{
       
     (async () => {
     try {
-    let getBlockchainInfo = await bitbox.Blockchain.getBlockchainInfo();
+    let getBlockchainInfo = await bchjs.Blockchain.getBlockchainInfo();
     //console.log(getBlockchainInfo);
     //socket.emit('update', 'BlockChain Info for BCH:');
     socket.emit('update', 'Chain: ' + getBlockchainInfo.chain);
@@ -535,72 +537,82 @@ try{
    //TODO: move price grab outside of address balance details to use elsewhere in price(amount of BCH) ie. create a function for pricegrab.
   (async () => {
     // use BITBOX to get details of BCH address submitted by user
-    let details = await bitbox.Address.details(msg);
+    let details = await bchjs.Electrumx.balance(msg);
     // use BITBOX to GET BCH PRICE IN USD
-    let usd = await bitbox.Price.current('usd');
-    usd = usd / 100;
+    let usd = await bchjs.Price.getUsd();
+    // usd = usd / 100;
     
-    let balanceUsd = details.balance * usd;
-    let totalRec = numberWithCommas((details.totalReceived * usd).toFixed(2));
-    let unconfirmedBalusd = numberWithCommas((details.unconfirmedBalance * usd).toFixed(2));
+    let confirmedSats = Number(details.balance.confirmed);
+    let unconfirmedSats = Number(details.balance.unconfirmed);
+    let totalSats = confirmedSats + unconfirmedSats;
+
+    let confirmedBCH = confirmedSats / 100000000;
+    let unconfirmedBCH = unconfirmedSats / 100000000;
+    let totalBCH = totalSats / 100000000;
+
+    let balanceUsd = (totalBCH * usd).toFixed(2);
+    //let totalRec = numberWithCommas((details.totalReceived * usd).toFixed(2));
+    let unconfirmedBalusd = numberWithCommas((unconfirmedSats * usd).toFixed(2));
     //if $ is over 3 digits, add a comma  = $420,420
-    balanceUsd = numberWithCommas(balanceUsd.toFixed(2));
+    balanceUsd = numberWithCommas(balanceUsd);
 
     // break down details array & print to user
-    socket.emit('update', 'Balance: ' + details.balance + ' BCH  ($' + balanceUsd + ' USD)');
-    socket.emit('update', 'Balance in Sats: ' + numberWithCommas(details.balanceSat));
-    socket.emit('update', '*Unconfirmed Balance: ' + details.unconfirmedBalance + ' BCH ($' + unconfirmedBalusd + ' USD)');
-    socket.emit('update', 'Unconfirmed Balance in Sats: ' + numberWithCommas(details.unconfirmedBalanceSat));
-    socket.emit('update', 'Total Received: ' + details.totalReceived + ' BCH ($' + totalRec + ' USD)');
-    socket.emit('update', 'Total Sats Received: ' + numberWithCommas(details.totalReceivedSat));
-	  socket.emit('update', 'Total Sent: ' + bitbox.BitcoinCash.toBitcoinCash(details.totalSentSat) + ' BCH');
-    socket.emit('update', 'Total Sats Sent: ' + numberWithCommas(details.totalSentSat));
+    socket.emit('update', 'Total Balance: ' + totalBCH + ' BCH  ($' + balanceUsd + ' USD)');
+    socket.emit('update', 'Balance in Sats: ' + numberWithCommas(totalSats));
+    if(unconfirmedSats > 0) {
+    socket.emit('update', '*Unconfirmed Balance: ' + unconfirmedBCH + ' BCH ($' + unconfirmedBalusd + ' USD)');
+    socket.emit('update', 'Unconfirmed Balance in Sats: ' + numberWithCommas(unconfirmedSats));
+  }
+   //  socket.emit('update', 'Total Received: ' + details.totalReceived + ' BCH ($' + totalRec + ' USD)');
+   //  socket.emit('update', 'Total Sats Received: ' + numberWithCommas(details.totalReceivedSat));
+	  // socket.emit('update', 'Total Sent: ' + bchjs.BitcoinCash.toBitcoinCash(details.totalSentSat) + ' BCH');
+   //  socket.emit('update', 'Total Sats Sent: ' + numberWithCommas(details.totalSentSat));
    
    //unconfirmed balance exists, tell user we're tracking it in the background
-	if (details.unconfirmedBalance !== 0){
-    socket.emit('example', '*Unconfirmed Balance detected: ' + details.unconfirmedBalance + ' BCH. NodeBox is tracking the balance. You can continue working & will be notified when it is confirmed.');
-  }
+	// if (details.unconfirmedBalance !== 0){
+ //    socket.emit('example', '*Unconfirmed Balance detected: ' + details.unconfirmedBalance + ' BCH. NodeBox is tracking the balance. You can continue working & will be notified when it is confirmed.');
+ //  }
 
-  //let i = 0;
+ //  //let i = 0;
 
-  //UNCONFIRMED BALANCE LOOP 
-  //unconfirmed balance detected. Let's track it and let the user know when it confirms.
-  while (details.unconfirmedBalance !== 0){
-			//socket.emit('update', 'Unconfirmed balance detected.... Tracking the balance until it is confirmed.')
+ //  //UNCONFIRMED BALANCE LOOP 
+ //  //unconfirmed balance detected. Let's track it and let the user know when it confirms.
+ //  while (details.unconfirmedBalance !== 0){
+	// 		//socket.emit('update', 'Unconfirmed balance detected.... Tracking the balance until it is confirmed.')
 
-      //TODO: add a var on client side to update while it's checking for a confirmation. something like a waiting ........
-     // while (i < 5){
-        //socket.emit('waiting', '.');
-        //console.log('i = ' + i);
-        //do something. i'd like to make a progress bar of sorts but it might be better to just let the user continue without having to wait.
-        // need to test if app will continue tracking while user continues issuing commands.
-       // i++;
+ //      //TODO: add a var on client side to update while it's checking for a confirmation. something like a waiting ........
+ //     // while (i < 5){
+ //        //socket.emit('waiting', '.');
+ //        //console.log('i = ' + i);
+ //        //do something. i'd like to make a progress bar of sorts but it might be better to just let the user continue without having to wait.
+ //        // need to test if app will continue tracking while user continues issuing commands.
+ //       // i++;
       
-     // if(i == 5){
-     //   i == 0;
-     // }
+ //     // if(i == 5){
+ //     //   i == 0;
+ //     // }
 
-      //re-check the balance every 10 seconds until balance == 0
-			await new Promise(resolve => setTimeout(resolve, 10000));
+ //      //re-check the balance every 10 seconds until balance == 0
+	// 		await new Promise(resolve => setTimeout(resolve, 10000));
 
-			let details = await bitbox.Address.details(msg);
+	// 		let details = await bchjs.Address.details(msg);
 
-      // each pass while unconfirmedBalance > 0, check if balance is 0 (has confirmed) & alert user if so.
-			if (details.unconfirmedBalance == 0){
-				socket.emit('chat message', 'Unconfirmed Balance for ' + msg + ' has been confirmed!');
+ //      // each pass while unconfirmedBalance > 0, check if balance is 0 (has confirmed) & alert user if so.
+	// 		if (details.unconfirmedBalance == 0){
+	// 			socket.emit('chat message', 'Unconfirmed Balance for ' + msg + ' has been confirmed!');
 
-      socket.emit('logo', '_╔╗_┌─┐┬__┌─┐┌┐┌┌─┐┌─┐__┬_┬┌─┐┌─┐__┌┐_┌─┐┌─┐┌┐┌__╔═╗╔═╗╔╗╔╔═╗╦╦═╗╔╦╗╔═╗╔╦╗┬');
-      socket.emit('logo', '_╠╩╗├─┤│__├─┤││││__├┤___├─┤├─┤└─┐__├┴┐├┤_├┤_│││__║__║_║║║║╠╣_║╠╦╝║║║║╣__║║│');
-      socket.emit('logo', '_╚═╝┴_┴┴─┘┴_┴┘└┘└─┘└─┘__┴_┴┴_┴└─┘__└─┘└─┘└─┘┘└┘__╚═╝╚═╝╝╚╝╚__╩╩╚═╩_╩╚═╝═╩╝o');
+ //      socket.emit('logo', '_╔╗_┌─┐┬__┌─┐┌┐┌┌─┐┌─┐__┬_┬┌─┐┌─┐__┌┐_┌─┐┌─┐┌┐┌__╔═╗╔═╗╔╗╔╔═╗╦╦═╗╔╦╗╔═╗╔╦╗┬');
+ //      socket.emit('logo', '_╠╩╗├─┤│__├─┤││││__├┤___├─┤├─┤└─┐__├┴┐├┤_├┤_│││__║__║_║║║║╠╣_║╠╦╝║║║║╣__║║│');
+ //      socket.emit('logo', '_╚═╝┴_┴┴─┘┴_┴┘└┘└─┘└─┘__┴_┴┴_┴└─┘__└─┘└─┘└─┘┘└┘__╚═╝╚═╝╝╚╝╚__╩╩╚═╩_╩╚═╝═╩╝o');
 
 
-        // TODO: real deal alert user funds have confirmed (needs to be done on client side): window.alert('Unconfirmed Balance has been confirmed!');
-				return;
-			//}
+ //        // TODO: real deal alert user funds have confirmed (needs to be done on client side): window.alert('Unconfirmed Balance has been confirmed!');
+	// 			return;
+	// 		//}
 
-		}
+	// 	}
 
-  }
+ //  }
   return;
     //separator for each address
     //socket.emit('chat message', '');
@@ -628,7 +640,7 @@ msgColonArray = msg.split(':');
 
 
 
-  if (SLP.Address.isSLPAddress(msg)) {
+  if (bchjs.SLP.Address.isSLPAddress(msg)) {
     //msgColonArray[0].toLowerCase() == 'simpleledger' ) {
     socket.emit('update', 'You have entered an SLP Token address (simpleledger):');
     socket.emit('update', msg);
@@ -663,7 +675,7 @@ msgColonArray = msg.split(':');
     (async () => {
   try {
     console.log(msg);
-    let balances = await SLP.Utils.balancesForAddress(msg);
+    let balances = await bchjs.PsfSlpIndexer.balance(msg);
     console.log(balances.length);
 
     console.log('starting balances.forEach');
@@ -693,17 +705,17 @@ msgColonArray = msg.split(':');
 
 
   // GET DETAILS OF TOKENS BY ID, PASS IN ARRAY OF TOKENS
-  (async () => {
-    try {
-      let list = await SLP.Utils.list([
-        "fa6c74c52450fc164e17402a46645ce494a8a8e93b1383fa27460086931ef59f",
-        "38e97c5d7d3585a2cbf3f9580c82ca33985f9cb0845d4dcce220cb709f9538b0"
-      ]);
-      console.log(list);
-    } catch (error) {
-      console.error(error);
-    }
-  })();
+  // (async () => {
+  //   try {
+  //     let list = await SLP.Utils.list([
+  //       "fa6c74c52450fc164e17402a46645ce494a8a8e93b1383fa27460086931ef59f",
+  //       "38e97c5d7d3585a2cbf3f9580c82ca33985f9cb0845d4dcce220cb709f9538b0"
+  //     ]);
+  //     console.log(list);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // })();
 
 
 
@@ -770,13 +782,13 @@ msgColonArray = msg.split(':');
 
 
 
-    	if ( bitbox.Address.isLegacyAddress(msg) == true) {
+    	if ( bchjs.Address.isLegacyAddress(msg) == true) {
     		//print original address
     		socket.emit('update', 'Legacy: ' + msg);
     		// mainnet w/ prefix
-  			cashAddr = bitbox.Address.toCashAddress(msg);
+  			cashAddr = bchjs.Address.toCashAddress(msg);
         // get/set the details before we continue with output
-        network = bitbox.Address.detectAddressNetwork(msg);
+        network = bchjs.Address.detectAddressNetwork(msg);
         
   			// bitcoincash:qzm47qz5ue99y9yl4aca7jnz7dwgdenl85jkfx3znl
   			socket.emit('update', 'CashAddr: ' + cashAddr);
@@ -784,14 +796,14 @@ msgColonArray = msg.split(':');
   			return;
     	}
     	
-    	 if (bitbox.Address.isCashAddress(msg) == true) {
+    	 if (bchjs.Address.isCashAddress(msg) == true) {
 
         // mainnet w/ prefix
-        legacy = bitbox.Address.toLegacyAddress(msg);
+        legacy = bchjs.Address.toLegacyAddress(msg);
         // mainnet w/ prefix
         //cashAddr = bitbox.Address.toCashAddress(msg);
         // get/set the details before we continue with output
-        network = bitbox.Address.detectAddressNetwork(msg);
+        network = bchjs.Address.detectAddressNetwork(msg);
 
     	  // print addresses
         socket.emit('update', 'CashAddr: ' + msg);
