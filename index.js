@@ -1,7 +1,7 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var port = process.env.PORT || 8088;
+var port = process.env.PORT || 8080;
 
 // require syntax for BCHjs by Permissionless Software Foundation psfoundation.cash fullstack.cash 
 // FULLSTACK.CASH in the house. Big thanks to Troutner & PermissionlessSoftwareFoundation (PSF)
