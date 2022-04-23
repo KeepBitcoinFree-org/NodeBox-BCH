@@ -131,7 +131,7 @@ io.on('connection', function(socket){
   //}, 1400);
 
     setTimeout(function() {
-  socket.emit('update', 'NVMM ROM Version: 4.092589');
+  socket.emit('update', 'NVMM ROM Version: 4.20000001');
   }, 1400);
       setTimeout(function() {
   socket.emit('update', 'Initializing USB Controllers...');
@@ -144,7 +144,7 @@ io.on('connection', function(socket){
   }, 2800);
 
   setTimeout(function() {
-      socket.emit('update', 'Welcome. NodeBox is an interactive terminal utilizing Node.js, Socket.io & BCH-JS. Using NodeBox, you can view information about specific Bitcoin Cash addresses or the BCH blockchain. Enter "help" to view all available commands. All data entered is private to each socket, or current browser session.');
+      socket.emit('update', 'Welcome. NodeBox is an interactive terminal utilizing Node.js, Socket.io & @psf/bchjs. Using NodeBox, you can view information about specific Bitcoin Cash addresses or the BCH blockchain, mempool, utxos, signed messages, etc. Enter "help" to view all available commands and get started. All data entered is completely private to each socket, or current browser session and destroyed upon reset. No logs are being stored that include any input. That being said, if you chose to enter your private key to sign a message, use an address with small amounts of BCH.');
      // socket.emit('example', 'Nodebox is still in beta. If you find critical any errors, let us know and we may send you a reward in SLP or BCH');
   }, 3600);
   
