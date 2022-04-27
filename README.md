@@ -5,7 +5,7 @@
 NodeBox is a Node.js app demonstrating functionality of the Socket.io & BITBOX-sdk npm modules. Enter "help" to view all available commands. All data entered is private to each socket, or browser session.
 
 ## Available online at:
-https://nodebox.keepbitcoinfree.org
+http://nodebox.ddns.net
 
 ### To run NodeBox locally, run the following commands(must have Node.js installed):
 
@@ -17,6 +17,7 @@ npm install
 
 node index
 
+Visit the app on a browser at http://localhost:8080
 
 Included in package.json file are the dependencies to be installed with npm install:
 
