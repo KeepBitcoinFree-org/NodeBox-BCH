@@ -543,18 +543,23 @@ try{
     // usd = usd / 100;
     
     let confirmedSats = Number(details.balance.confirmed);
-    let unconfirmedSats = Number(details.balance.unconfirmed);
+    let unconfirmedSats = details.balance.unconfirmed;
     let totalSats = confirmedSats + unconfirmedSats;
+
+    //console.log('unconfirmedSats = '+ unconfirmedSats);
+    //console.log('usd = '+ usd);
 
     let confirmedBCH = confirmedSats / 100000000;
     let unconfirmedBCH = unconfirmedSats / 100000000;
+    //console.log('unconfirmedBCH = '+ unconfirmedBCH);
     let totalBCH = totalSats / 100000000;
 
     let balanceUsd = (totalBCH * usd).toFixed(2);
     //let totalRec = numberWithCommas((details.totalReceived * usd).toFixed(2));
-    let unconfirmedBalusd = numberWithCommas((unconfirmedSats * usd).toFixed(2));
+    let unconfirmedBalusd = (unconfirmedBCH * usd).toFixed(2);
     //if $ is over 3 digits, add a comma  = $420,420
     balanceUsd = numberWithCommas(balanceUsd);
+    unconfirmedBalusd = numberWithCommas(unconfirmedBalusd);
 
     // break down details array & print to user
     socket.emit('update', 'Total Balance: ' + totalBCH + ' BCH  ($' + balanceUsd + ' USD)');
