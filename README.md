@@ -6,6 +6,7 @@ NodeBox is a Node.js app demonstrating functionality of the Socket.io & [@psf/bc
 
 ## Available online at:
 http://nodebox.ddns.net
+http://nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion
 
 ### To run NodeBox locally, run the following commands (must have git & Node.js installed):
 
