@@ -1,11 +1,10 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 80;
 
 // require syntax for BCHjs by Permissionless Software Foundation psfoundation.cash fullstack.cash 
-// FULLSTACK.CASH in the house. Big thanks to Troutner & PermissionlessSoftwareFoundation (PSF)
-// const TOKENID = "6448381f9649ecacd8c30189cfbfee71a91b6b9738ea494fe33f8b8b51cbfca0"
+// FULLSTACK.CASH in the house. Big thanks to Trout & the Permissionless Software Foundation (PSF) - https://psfoundation.cash
 
 // REST API servers.
 const BCHN_MAINNET = 'https://bchn.fullstack.cash/v5/'
@@ -24,10 +23,15 @@ function numberWithCommas(x) {
 }
 
 // SERVES PAGE WHEN REQ IS RECIEVED, SENDS BACK RESPONSE
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+app.get('/', function(req, res) {
+	res.set("Onion-Location", "http://nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion$request_uri");
+	res.sendFile(__dirname + '/index.html');
 });
 
+// ADD HTTP HEADERS IN TO SOCKET.IO REQUESTS
+io.engine.on("headers", (headers, req) => {
+  headers["Onion-Location"] = "http://nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion$request_uri";
+});
 
 //TODO: clean this shit up. Now fuck off, I got work to do.
 
@@ -57,10 +61,10 @@ io.on('connection', function(socket){
   socket.emit('logo', '______________XXXXX_______________NODEjs&&SOCKETio______________XXXXX_______________');
   socket.emit('logo', '_____________XXXXXX____________KEEPBITCOINFREE.org______________XXXXXX______________');
   socket.emit('logo', '_____________XXXXX____________XXXXXXXX_______XXXXX_______________XXXXX______________');
-  socket.emit('logo', '____________XXXXX________________XXXXX_______XXXX_________________XXXXX_____________');
+  socket.emit('logo', '____________XXXXX________________XXXXXX______XXXX_________________XXXXX_____________');
   socket.emit('logo', '____________XXXXX_________________XXXXX____XXXXXX_________________XXXXX_____________');
   socket.emit('logo', '____________XXXXX_________________XXXXXXXXXXXXXXXXXX______________XXXXX_____________');
-  socket.emit('logo', '____________XXXXX__________________XXXXXXXXXXXXXXXXXX_____________XXXXX_____________');
+  socket.emit('logo', '____________XXXXX__________________XPSFXBCHJSXXXXXXXX_____________XXXXX_____________');
   socket.emit('logo', '____________XXXXX__________________XXXXX________XXXXX_____________XXXXX_____________');
   socket.emit('logo', '____________XXXXX___________________XXXX________XXXXX_____________XXXXX_____________');
   socket.emit('logo', '____________XXXXX___________________XXXXX______XXXXXX____________XXXXXX_____________');
@@ -131,7 +135,7 @@ io.on('connection', function(socket){
   //}, 1400);
 
     setTimeout(function() {
-  socket.emit('update', 'NVMM ROM Version: 4.20000001');
+  socket.emit('update', 'NVMM ROM Version: 4.20000002');
   }, 1400);
       setTimeout(function() {
   socket.emit('update', 'Initializing USB Controllers...');
@@ -144,7 +148,11 @@ io.on('connection', function(socket){
   }, 2800);
 
   setTimeout(function() {
-      socket.emit('update', 'Welcome. NodeBox is an interactive terminal utilizing Node.js, Socket.io & @psf/bchjs. Using NodeBox, you can view information about specific Bitcoin Cash addresses or the BCH blockchain, mempool, utxos, signed messages, etc. Enter "help" to view all available commands and get started. All data entered is private to each socket, or current browser session, and destroyed upon reset.');
+  	socket.emit('update', 'System booted successfully. Use NodeBox securely and anonymously on TOR at nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion');
+  }, 3200);
+
+  setTimeout(function() {
+      socket.emit('update', 'Welcome. NodeBox is an interactive terminal utilizing Node.js, Socket.io & @psf/bchjs. Using NodeBox, you can view information about specific Bitcoin Cash addresses or the BCH blockchain, mempool, utxos, signed messages, etc. Enter "help" to view all available commands and get started. All data entered is private to each socket, or current browser session, and destroyed upon reset. ');
      // socket.emit('example', 'Nodebox is still in beta. If you find critical any errors, let us know and we may send you a reward in SLP or BCH');
   }, 3600);
   
@@ -222,11 +230,19 @@ io.on('connection', function(socket){
     //toBitcoinCash()
     if (msgParArray[0] == 'tobitcoincash') {
         //convert user entered satoshis to $BCH
-        let toBitcoinCash = bchjs.BitcoinCash.toBitcoinCash(msgInsideParen[1]);
+          (async () => {
+             try {
 
-        //TODO: add in price details of BCH
+            let toBitcoinCash = bchjs.BitcoinCash.toBitcoinCash(msgInsideParen[1]);
+            // add in price details of BCH
+            let usd = await bchjs.Price.getUsd();
+            let toBitcoinCashusd = (toBitcoinCash * usd).toFixed(4);
 
-        socket.emit('update', msgInsideParen[1] + ' Satoshis converted to BCH: ' + toBitcoinCash);
+            socket.emit('update', msgInsideParen[1] + ' Satoshis converted to BCH: ' + toBitcoinCash + ', $'+toBitcoinCashusd);
+        } catch(error) {
+          console.error(error)
+         }
+        })()
     }
 
     //utxo(BCH_ADDRESS)
@@ -289,7 +305,7 @@ if(msgParArray[0] == 'createseedbuffer'){
 
   // TRY BLOCK FOR COMMANDS WITH commas , 
   // SIGN module: if there are commas present in the msg & the first word is 'sign' then try to sign a message with PrivateKeyWIF
-  // TESTING: sign, KxtpRDUJDiutLaTV8Vuavhb6h7zq9YV9ZKA3dU79PCgYmNVmkkvS, Bitcoin Cash is Bitcoin
+  // TESTING EXAMPLE: sign, KxtpRDUJDiutLaTV8Vuavhb6h7zq9YV9ZKA3dU79PCgYmNVmkkvS, Bitcoin Cash is Bitcoin
   try {
      // debug: console.log('checking if msg qualifies for the sign message module');
     msgArray = msg.split(',');
@@ -527,7 +543,7 @@ try{
 
 
     // IF msg doesn't match anything else, let's check the 
-    //ADDRESS DETAILS: using BITBOX to hit API and get info for BCH address.
+    //ADDRESS DETAILS: using @psf\bch-js to hit API and get avail info for BCH address.
     // async function to get all details of BCH address
   
  
@@ -827,5 +843,5 @@ msgColonArray = msg.split(':');
 
 // Listen on port set in ENV file, otherwise use default port 80
 http.listen(port, function(){
-  console.log('listening on *:' + port);
+  console.log('NodeBox is listening on localhost/IP:' + port);
 });
