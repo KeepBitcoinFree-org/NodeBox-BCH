@@ -17,12 +17,14 @@ npm install
 
 node index
 
-Visit the app on a browser at http://localhost:8080
+Visit the app on a browser at http://localhost
+
+The port can be changed by including a .env file with PORT= or by editing the index.js file and changing the default port.
 
 Included in package.json file are the dependencies to be installed with npm install:
 
   "dependencies": {
     "@psf/bch-js": "latest",
-    "express": "^4.15.2",
-    "socket.io": "^1.7.3" 
+    "express": "latest",
+    "socket.io": "latest" 
   }
