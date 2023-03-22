@@ -1,11 +1,11 @@
 {
   "name": "NodeBox-BCH",
-  "version": "0.0.1",
-  "description": "Node.js app utilizing socket.io & BITBOX for viewing BCH address details & tracking unconfirmed balances",
+  "version": "1.0.0",
+  "description": "Node.js app utilizing socket.io & @psf/bch-js for viewing information about the Bitcoin Cash, BCH, blockchain and addresses, as you would normally see through RPC calls to a full node.",
   "dependencies": {
-    "express": "^4.15.2",
+    "express": "latest",
     "@psf/bch-js": "latest",
-    "socket.io": "^1.7.3"
+    "socket.io": "latest"
   },
   "scripts": {
     "start": "node index.js"
