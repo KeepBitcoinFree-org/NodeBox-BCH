@@ -1,7 +1,24 @@
 var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var port = process.env.PORT || 80;
+
+// using HTTPS instead of HTTP. Like shielded ZEC instead of BTC.
+const fs = require("fs");
+const options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/nodebox.ddns.net/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/nodebox.ddns.net/fullchain.pem')
+};
+const https = require('https').Server(options, app);
+
+// Creating Socket instance and attaching to https server. Also setting port to 443 for HTTPS
+var io = require('socket.io')(https);
+io.attach(https);
+var port = process.env.PORT || 443;
+
+// HTTP server to redirect requests
+var httpApp = require('express')();
+//var http = require('http').Server(app);
+httpApp.get('*', (req, res) => res.redirect(301, 'https://nodebox.ddns.net'));
+//const httpServer = http.createServer(httpApp);
+httpApp.listen(80, () => console.log('HTTP server listening: http://localhost'));
 
 // require syntax for BCHjs by Permissionless Software Foundation psfoundation.cash fullstack.cash 
 // FULLSTACK.CASH in the house. Big thanks to Trout & the Permissionless Software Foundation (PSF) - https://psfoundation.cash
@@ -841,7 +858,7 @@ msgColonArray = msg.split(':');
   });
 });
 
-// Listen on port set in ENV file, otherwise use default port 80
-http.listen(port, function(){
+// Listen on port set in ENV file, otherwise use default SSL port 443
+https.listen(port, function(){
   console.log('NodeBox is listening on localhost/IP:' + port);
 });
