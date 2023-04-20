@@ -1,6 +1,6 @@
 var app = require('express')();
 
-// using HTTPS instead of HTTP. Like shielded ZEC instead of BTC.
+// using HTTPS instead of HTTP. Like shielded ZEC, or CashFusion on BCH, instead of BTC.
 const fs = require("fs");
 const options = {
   key: fs.readFileSync('/etc/letsencrypt/live/nodebox.ddns.net/privkey.pem'),
@@ -50,12 +50,8 @@ io.engine.on("headers", (headers, req) => {
   headers["Onion-Location"] = "http://nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion$request_uri";
 });
 
-//TODO: clean this shit up. Now fuck off, I got work to do.
 
-//testing waiting emit
-//socket.emit('waiting', '.');
-
-// NEW USER CONNECTED HERE
+// NEW USER CONNECTED TO SOCKET/SESSION 
 io.on('connection', function(socket){
   
 
@@ -169,25 +165,31 @@ io.on('connection', function(socket){
   }, 3200);
 
   setTimeout(function() {
-      socket.emit('update', 'Welcome. NodeBox is an interactive terminal utilizing Node.js, Socket.io & @psf/bchjs. Using NodeBox, you can view information about specific Bitcoin Cash addresses or the BCH blockchain, mempool, utxos, signed messages, etc. Enter "help" to view all available commands and get started. All data entered is private to each socket, or current browser session, and destroyed upon reset. ');
+      socket.emit('update', 'Welcome. NodeBox is an interactive terminal utilizing Node.js, Socket.io & @psf/bchjs. Using NodeBox, you can view information about specific Bitcoin Cash addresses or the BCH blockchain, mempool, utxos, signed messages, etc. ');
      // socket.emit('example', 'Nodebox is still in beta. If you find critical any errors, let us know and we may send you a reward in SLP or BCH');
   }, 3600);
   
-
-	// FORM SUBMIT STARTS HERE
+  setTimeout(function() {
+    socket.emit('update', 'Enter "help" to view all available commands and get started. All data entered is private to each socket, or current browser session, and destroyed upon reset. ');
+  }, 3800);
+  
+	// ALL FORM SUBMIT STARTS HERE //
+  
   socket.on('chat message', function(msg){
-  // message (msg) has been submitted, take actions
+  // message (msg) has been submitted by user, take actions
     
-  // trim the message string to remove any leading or late 
+  // trim the message string to remove any leading or late whitespaces
   msg = msg.trim();
+  // strip to lowercase
   msglow = msg.toLowerCase();
-  //logs for debugging submission and flow
+  
+  //logs for debugging submission and flow // Always deactivated for PRODUCTION
 	//console.log('User submitted: ' + msg);
 
-  //print the users command back to them with a prefix
+  //print the users command back to them with a Bitcoin prefix
   socket.emit('chat message', '₿:\\ ' + msg);
 
-  // REGULAR WORD MATCHES, including donate, reboot, clean,
+  // REGULAR WORD MATCHES, including donate, reboot, clean //
 
   // GetMiningInfo()
   if (msglow == 'getmininginfo'){
@@ -203,8 +205,9 @@ io.on('connection', function(socket){
      socket.emit('update', 'Verification Percentage: %' + getMiningInfo.verificationprogress);
      // socket.emit('update', 'PooledTx: ' + getMiningInfo.pooledtx);
      // socket.emit('update', 'Chain: ' +  getMiningInfo.chain);
-    } catch(error) {
-     console.error(error)
+    }catch(error) {
+      console.error(error)
+      socket.emit('error', 'Error: ' + error);
       } 
     })()
     return;
@@ -238,6 +241,7 @@ io.on('connection', function(socket){
     //toSatoshi()
     if (msgParArray[0] == 'tosatoshi') {
       // convert user entered $BCH to satoshis
+      // TODO: convert to Number and strip out any commas
       let toSatoshi = bchjs.BitcoinCash.toSatoshi(msgInsideParen[1]);
       // 9 = 900000000
       socket.emit('update', msgInsideParen[1] + ' BCH converted to Satoshis: ' + numberWithCommas(toSatoshi));
@@ -249,6 +253,7 @@ io.on('connection', function(socket){
         //convert user entered satoshis to $BCH
           (async () => {
              try {
+            // TODO: convert to Number and strip out any commas
 
             let toBitcoinCash = bchjs.BitcoinCash.toBitcoinCash(msgInsideParen[1]);
             // add in price details of BCH
@@ -257,7 +262,8 @@ io.on('connection', function(socket){
 
             socket.emit('update', msgInsideParen[1] + ' Satoshis converted to BCH: ' + toBitcoinCash + ', $'+toBitcoinCashusd);
         } catch(error) {
-          console.error(error)
+          console.error(error);
+          socket.emit('error', 'Error: ' + error);
          }
         })()
     }
@@ -269,11 +275,12 @@ io.on('connection', function(socket){
         try {
           let utxo = await bchjs.Address.utxo(msgInsideParen[1]);
           //console.log(utxo);
-          //TODO: break this out or build for loop to print each obj in array.
+          //TODO: break this out to be able to read it, or build a for loop to print each obj in array. Right now it's just a jumble of info.
           socket.emit('update', JSON.stringify(utxo));
 
         } catch(error) {
-          console.error(error)
+          console.error(error);
+          socket.emit('error', 'Error: ' + error);
          }
         })()
     }
@@ -320,8 +327,9 @@ if(msgParArray[0] == 'createseedbuffer'){
 
 
 
-  // TRY BLOCK FOR COMMANDS WITH commas , 
-  // SIGN module: if there are commas present in the msg & the first word is 'sign' then try to sign a message with PrivateKeyWIF
+  // TRY BLOCK FOR COMMANDS WITH commas , ( VERIFY, SIGN, ENCRYPT, & DECRYPT) //
+  
+  // SIGN module: if there are commas present in the msg & the first word is 'sign' then try to sign a message with provided PrivateKeyWIF
   // TESTING EXAMPLE: sign, KxtpRDUJDiutLaTV8Vuavhb6h7zq9YV9ZKA3dU79PCgYmNVmkkvS, Bitcoin Cash is Bitcoin
   try {
      // debug: console.log('checking if msg qualifies for the sign message module');
@@ -437,7 +445,7 @@ if(msgParArray[0] == 'createseedbuffer'){
       socket.emit('update', 'Enter "toBitcoinCash(# of Satoshis)" to return the amount of BCH for supplied amount of Sats.');
       socket.emit('update', 'Enter "getMiningInfo" to return mining-related information.');
       socket.emit('update', 'Enter utxo(BCH_ADDRESS) to return a list of utxos for a legacy or cash address.');
-      socket.emit('update', 'Enter "encryptBIP38, PRIVATEKEYWIF, PASSWORD" to encrypt privkey WIFs with BIP39.');
+      socket.emit('update', 'Enter "encryptBIP38, PRIVATEKEYWIF, PASSWORD" to encrypt privkey WIFs with BIP38.');
       socket.emit('example', 'encryptBIP38, L1phBREbhL4vb1uHHHCAse8bdGE5c7ic2PFjRxMawLzQCsiFVbvu, 9GKVkabAHBMyAf');
       socket.emit('update', 'Enter "decryptBIP38, encryptedPRIVATEKEYWIF, PASSWORD" to decrypt with, network.');
       socket.emit('example', 'decryptBIP38, 6PYU2fDHRYfsKawL4KYornRFgimHnEovxU4VcgDaVtsVuuzQEfWDYwBQLd, Password123, mainnet');
@@ -827,9 +835,7 @@ msgColonArray = msg.split(':');
   			cashAddr = bchjs.Address.toCashAddress(msg);
         // get/set the details before we continue with output
         network = bchjs.Address.detectAddressNetwork(msg);
-        
-  			// bitcoincash:qzm47qz5ue99y9yl4aca7jnz7dwgdenl85jkfx3znl
-  			socket.emit('update', 'CashAddr: ' + cashAddr);
+        socket.emit('update', 'CashAddr: ' + cashAddr);
   			socket.emit('update', 'Network: ' + network);
   			return;
     	}
@@ -851,7 +857,7 @@ msgColonArray = msg.split(':');
     	}
 	}catch(error) {
 			console.log(error);
-			socket.emit('update', error.message);
+			socket.emit('error', error.message);
 			return;
     	}
 

@@ -99,6 +99,10 @@
           $('#messages').append($('<li style="color:#0f0;">').text(msg));
           window.scrollTo(0, document.body.scrollHeight);
         });
+	socket.on('error', function(msg){
+	  $('#messages').append($('<li style="color:red;>').text(msg));
+	  window.scrollTo(0, document.body.scrollHeight);
+	});
         // socket.on('waiting', function(msg){
          // $('#messages').append($('<span>').text(msg));
          // window.scrollTo(0, document.body.scrollHeight);
