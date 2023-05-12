@@ -1,4 +1,8 @@
 var app = require('express')();
+//var express = require('express');
+
+//const express = require('express');
+//const app = express();
 
 // using HTTPS instead of HTTP. Like shielded ZEC, or CashFusion on BCH, instead of BTC.
 const fs = require("fs");
@@ -9,7 +13,13 @@ const options = {
 const https = require('https').Server(options, app);
 
 // Creating Socket instance and attaching to https server. Also setting port to 443 for HTTPS
-var io = require('socket.io')(https);
+var io = require('socket.io')(https); //, {
+//  cors: {
+//    origin: "https://nodebox-ddns.net"
+   //  methods: ["GET", "POST"]
+//  }
+//});
+
 io.attach(https);
 var port = process.env.PORT || 443;
 
@@ -19,6 +29,14 @@ var httpApp = require('express')();
 httpApp.get('*', (req, res) => res.redirect(301, 'https://nodebox.ddns.net'));
 //const httpServer = http.createServer(httpApp);
 httpApp.listen(80, () => console.log('HTTP server listening: http://localhost'));
+
+app.get('/js', (req, res) => {
+  res.sendFile(__dirname + 'js');
+});
+//app.use(https.static(__dirname + '/js'));
+//app.use('*', (req, res) => {
+//    res.sendFile(__dirname + req.originalUrl)
+//})
 
 // require syntax for BCHjs by Permissionless Software Foundation psfoundation.cash fullstack.cash 
 // FULLSTACK.CASH in the house. Big thanks to Trout & the Permissionless Software Foundation (PSF) - https://psfoundation.cash
@@ -39,9 +57,17 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+// SERVES ANY CUSTOM JS FILES
+// app.use(express.static('js'));
+
 // SERVES PAGE WHEN REQ IS RECIEVED, SENDS BACK RESPONSE
 app.get('/', function(req, res) {
 	res.set("Onion-Location", "http://nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion$request_uri");
+	res.setHeader("Access-Control-Allow-Origin", "https://nodebox.ddns.net");
+	res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+	res.setHeader("X-Content-Type-Options", "nosniff");
+	res.setHeader("X-Frame-Options", "SAMEORIGIN");
+//	res.setHeader("Content-Security-Policy", "script-src 'self'"); // need to figure out how to allow inline scripts // and download the googlefont im using
 	res.sendFile(__dirname + '/index.html');
 });
 
@@ -436,7 +462,7 @@ if(msgParArray[0] == 'createseedbuffer'){
   try{
     // debug: console.log('checking if msg qualifies for help module');
     if (msglow == 'help'){
-      socket.emit('update', 'Enter a BCH address in Legacy, Cashaddr or simpleledger format to display the latest info about that address. If an unconfirmed balance is detected for that address, the system will track it until it is confirmed.');
+      socket.emit('update', 'Enter a BCH address in Legacy, Cashaddr or simpleledger format to display the latest info about that address. If an unconfirmed balance is detected for the address, the system will display it as unconfirmed. Be aware that no confirmations are required to send Bitcoin Cash, as 0-conf tx is a feature.');
       socket.emit('update', 'Enter "getBlockchainInfo" to return the latest info regarding the BCH Blockchain.');
       socket.emit('update', 'Enter "getBlockCount" to return the latest number of blocks in the longest Blockchain.');
       socket.emit('update', 'Enter "getDifficulty" to return the proof-of-work difficulty as a multiple of the minimum difficulty.');
