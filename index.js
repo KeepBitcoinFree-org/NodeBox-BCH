@@ -12,7 +12,7 @@ const options = {
 };
 const https = require('https').Server(options, app);
 
-// Creating Socket instance and attaching to https server. Also setting port to 443 for HTTPS
+// Creating Socket instance and attaching to HTTPS server. Also setting port to 443 for HTTPS
 var io = require('socket.io')(https, { forceNew: true, transports: ['polling'] }); //, {
 
 
@@ -29,11 +29,12 @@ io.attach(https);
 var port = process.env.PORT || 443;
 
 // HTTP server to redirect requests
-// var httpApp = require('express')();
-const httpApp = require('http').createServer();
+var httpApp = require('express')();
+// const httpApp = require('http').createServer();
+var server = require('http').createServer(httpApp);
+var io2 = require('socket.io')(server);
 
 
-var io2 = require('socket.io')(httpApp);
 // HTTP server for port 8083
 //var httpApp8083 = require('express')();
 //httpApp8083.listen(8083, () => console.log('HTTP server listening on http://localhost:8083'));
