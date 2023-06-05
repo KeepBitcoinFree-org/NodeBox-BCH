@@ -40,7 +40,7 @@ var io2 = require('socket.io')();
 //var http = require('http').Server(app);
 
 // HTTP APP GET ALL TO REDIRECT.
-httpApp.get('*', (req, res) => { 
+app.get('*', (req, res) => { 
   console.log((new Date).toLocaleTimeString('en-US', { timeZone: 'America/New_York' }) + ' - request recieved for HTTP app FROM ' + req.ip);
   console.log((new Date).toLocaleTimeString('en-US', { timeZone: 'America/New_York' }) + ' - req.path = ' + req.path);
   console.log((new Date).toLocaleTimeString('en-US', { timeZone: 'America/New_York' }) + ' - req.host = ' + req.hostname); 
@@ -69,7 +69,7 @@ httpApp.get('*', (req, res) => {
 
 })
 //const httpServer = http.createServer(httpApp);
-httpApp.listen(80, () => console.log('HTTP server listening: http://localhost'));
+app.listen(80, () => console.log('HTTP server listening: http://localhost'));
 
 app.get('/js', (req, res) => {
   console.log('request = ' + req);
