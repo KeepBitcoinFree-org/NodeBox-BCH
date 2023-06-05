@@ -13,7 +13,10 @@ const options = {
 const https = require('https').Server(options, app);
 
 // Creating Socket instance and attaching to https server. Also setting port to 443 for HTTPS
-var io = require('socket.io')(https); //, {
+var io = require('socket.io')(https, { forceNew: true, transports: ['polling'] }); //, {
+
+var io2 = require('socket.io')();
+//io2.attach(httpApp);
 //  cors: {
 //    origin: "https://nodebox-ddns.net"
    //  methods: ["GET", "POST"]
@@ -25,12 +28,45 @@ var port = process.env.PORT || 443;
 
 // HTTP server to redirect requests
 var httpApp = require('express')();
+// HTTP server for port 8083
+//var httpApp8083 = require('express')();
+//httpApp8083.listen(8083, () => console.log('HTTP server listening on http://localhost:8083'));
+//httpApp8083.get('*', (req, res) => res.sendFile('index.html', { root: path.join(__dirname, '../html')})) ;
+
 //var http = require('http').Server(app);
-httpApp.get('*', (req, res) => res.redirect(301, 'https://nodebox.ddns.net'));
+httpApp.get('*', (req, res) => { 
+  console.log((new Date).toLocaleTimeString('en-US', { timeZone: 'America/New_York' }) + ' - request recieved for HTTP app FROM ' + req.ip);
+  console.log((new Date).toLocaleTimeString('en-US', { timeZone: 'America/New_York' }) + ' - req.path = ' + req.path);
+  console.log((new Date).toLocaleTimeString('en-US', { timeZone: 'America/New_York' }) + ' - req.host = ' + req.hostname); 
+  if(req.hostname === 'nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion'){
+    // serve page as normal to TOR user
+       // res.set("Onion-Location", "http://nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion$request_uri");
+       // res.setHeader("Access-Control-Allow-Origin", "http://nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion");
+       // res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+        //res.setHeader("X-Content-Type-Options", "nosniff");
+        //res.setHeader("X-Frame-Options", "SAMEORIGIN");
+       // res.setHeader("Referrer-Policy", "no-referrer");
+       // res.setHeader("Feature-Policy", "geolocation 'none'; midi 'none'; microphone 'none';");
+       // res.setHeader("X-Permitted-Cross-Domain-Policies", "none");
+       // res.setHeader("Pragma", "no-cache");
+       // res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+       // res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
+       // res.setHeader("Content-Security-Policy", " object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests; block-all-mixed-content");
+//      res.setHeader("Content-Security-Policy", "script-src 'self'"); // need to figure out how to allow inline scripts // and download the googlefont im using
+        // console.log('req.path = ' + req.path);
+        res.sendFile(__dirname + '/index2.html');
+  }else{
+    // otherwise redirect any other HTTP traffic to HTTPS URL
+    console.log((new Date).toLocaleTimeString('en-US', { timeZone: 'America/New_York' }) + " - REDIRECTING TO HTTPS for " + req.ip);
+    res.redirect(301, 'https://nodebox.ddns.net');
+  }
+
+})
 //const httpServer = http.createServer(httpApp);
 httpApp.listen(80, () => console.log('HTTP server listening: http://localhost'));
 
 app.get('/js', (req, res) => {
+  console.log('request = ' + req);
   res.sendFile(__dirname + 'js');
 });
 //app.use(https.static(__dirname + '/js'));
@@ -62,12 +98,26 @@ function numberWithCommas(x) {
 
 // SERVES PAGE WHEN REQ IS RECIEVED, SENDS BACK RESPONSE
 app.get('/', function(req, res) {
+
+console.log('received request for nodebox.ddns.net/ - hostname = ' +  req.hostname);
+
+if(req.hostname !== 'nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion'){
+	console.log('h0stname is not nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion, setting headers');
 	res.set("Onion-Location", "http://nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion$request_uri");
 	res.setHeader("Access-Control-Allow-Origin", "https://nodebox.ddns.net");
 	res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
 	res.setHeader("X-Content-Type-Options", "nosniff");
 	res.setHeader("X-Frame-Options", "SAMEORIGIN");
+	res.setHeader("Referrer-Policy", "no-referrer");
+	res.setHeader("Feature-Policy", "geolocation 'none'; midi 'none'; microphone 'none';");
+	res.setHeader("X-Permitted-Cross-Domain-Policies", "none");
+	res.setHeader("Pragma", "no-cache");
+	res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+	res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
+	res.setHeader("Content-Security-Policy", " object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests; block-all-mixed-content");
 //	res.setHeader("Content-Security-Policy", "script-src 'self'"); // need to figure out how to allow inline scripts // and download the googlefont im using
+	console.log((new Date).toLocaleTimeString('en-US', { timeZone: 'America/New_York' }) + ' - IP = ' + req.ip + ', req.path = ' + req.path);
+	}
 	res.sendFile(__dirname + '/index.html');
 });
 
@@ -216,6 +266,23 @@ io.on('connection', function(socket){
   socket.emit('chat message', '₿:\\ ' + msg);
 
   // REGULAR WORD MATCHES, including donate, reboot, clean //
+
+if (msglow == 'gettxout'){
+ (async () => {
+   try {
+	// TODO: split out in () to get txid to lookup
+	let txid;
+	let utxoInfo = await bchjs.Blockchain.getTxOut();
+// let getTxOut = await bchjs.Blockchain.getTxOut("e25682caafc7000645d59f4c11d8d594b2943979b9d8fafb9f946e2b35c21b7e", 1);
+
+  } catch(error){
+      console.log(error);
+      console.error(error);
+  }
+ 
+ })();
+return;
+}
 
   // GetMiningInfo()
   if (msglow == 'getmininginfo'){

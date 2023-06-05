@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "Node.js app utilizing socket.io & @psf/bch-js for viewing information about the Bitcoin Cash, BCH, blockchain and addresses, as you would normally see through RPC calls to a full node.",
   "dependencies": {
-    "express": "latest",
     "@psf/bch-js": "latest",
-    "socket.io": "latest"
+    "express": "latest",
+    "fs": "0.0.1-security",
+    "https": "^1.0.0",
+    "socket.io": "^4.6.1"
   },
   "scripts": {
     "start": "node index.js"
