@@ -31,7 +31,7 @@ var port = process.env.PORT || 443;
 // HTTP server to redirect requests
 var httpApp = require('express')();
 
-var io2 = require('socket.io')(httpApp);
+var io2 = require('socket.io')();
 // HTTP server for port 8083
 //var httpApp8083 = require('express')();
 //httpApp8083.listen(8083, () => console.log('HTTP server listening on http://localhost:8083'));
