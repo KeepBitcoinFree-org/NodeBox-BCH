@@ -60,7 +60,7 @@ httpApp.get('*', (req, res) => {
        // res.setHeader("Content-Security-Policy", " object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests; block-all-mixed-content");
 //      res.setHeader("Content-Security-Policy", "script-src 'self'"); // need to figure out how to allow inline scripts // and download the googlefont im using
         // console.log('req.path = ' + req.path);
-        res.sendFile(__dirname + '/index2.html');
+        res.sendFile(__dirname + '/index.html');
   }else{
     // otherwise redirect any other HTTP traffic to HTTPS URL
     console.log((new Date).toLocaleTimeString('en-US', { timeZone: 'America/New_York' }) + " - REDIRECTING TO HTTPS for " + req.ip);
