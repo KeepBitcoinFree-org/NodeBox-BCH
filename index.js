@@ -1,4 +1,4 @@
-var app = require('express')();
+const app = require('express')();
 //var express = require('express');
 
 //const express = require('express');
@@ -29,11 +29,11 @@ io.attach(https);
 var port = process.env.PORT || 443;
 
 // HTTP server to redirect requests
-var httpApp = require('express')();
+const httpApp = require('express')();
 // const httpApp = require('http').createServer();
-var httpServer = require('http').createServer(httpApp);
+var httpServer = require('http').Server(httpApp);
 var io2 = require('socket.io')(httpServer, { forceNew: true, transports: ['polling'] });
-io2.attach(httpServer);
+// io2.attach(httpServer);
 
 // HTTP server for port 8083
 //var httpApp8083 = require('express')();
