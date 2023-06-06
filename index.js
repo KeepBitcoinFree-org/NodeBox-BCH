@@ -31,9 +31,9 @@ var port = process.env.PORT || 443;
 // HTTP server to redirect requests
 var httpApp = require('express')();
 // const httpApp = require('http').createServer();
-var server = require('http').createServer(httpApp);
-var io2 = require('socket.io')(server);
-
+var httpServer = require('http').createServer(httpApp);
+var io2 = require('socket.io')(httpServer, { forceNew: true, transports: ['polling'] });
+io2.attach(httpServer);
 
 // HTTP server for port 8083
 //var httpApp8083 = require('express')();
