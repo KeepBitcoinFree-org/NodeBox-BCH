@@ -86,7 +86,7 @@
             window.location.replace('https://keepbitcoinfree.org');
           }
           if($('#m').val() == 'donate'){
-            $('#messages').append($('<li style="color:#0f0;text-align:center;"><a href="bitcoincash:qr2fmqy796u2nevuj57vhmcak7vv786zjq389wv7ly"><img src="nodebox-donation-addr.png" height=250px width=250px /></a>'));
+            $('#messages').append($('<li style="color:#0f0;text-align:center;"><a href="bitcoincash:qr2fmqy796u2nevuj57vhmcak7vv786zjq389wv7ly"><img src="/img/nodebox-donation-addr.png" height=250px width=250px /></a>'));
           }
           socket.emit('chat message', $('#m').val());
           $('#m').val('');
