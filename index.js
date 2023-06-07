@@ -390,6 +390,23 @@ return;
         })()
     }
 
+    //utxo(BCH_ADDRESS)
+    if (msgParArray[0] == 'gettxdata') {
+        // get all utxos for an address
+        (async () => {
+        try {
+          let utxo = await bchjs.Electrumx.txData(msgInsideParen[1]);
+          //console.log(utxo);
+          //TODO: break this out to be able to read it, or build a for loop to print each obj in array. Right now it's just a jumble of info.
+          socket.emit('update', JSON.stringify(utxo));
+
+        } catch(error) {
+          console.error(error);
+          socket.emit('error', 'Error: ' + error);
+         }
+        })()
+    }
+
     //create seed buffer from passed mnemonic seed
 if(msgParArray[0] == 'createseedbuffer'){
   console.log(msgInsideParen);
@@ -549,6 +566,7 @@ if(msgParArray[0] == 'createseedbuffer'){
       socket.emit('update', 'Enter "toSatoshi(# of BCH)" to return the amount of Satoshis for the supplied amount of BCH.');
       socket.emit('update', 'Enter "toBitcoinCash(# of Satoshis)" to return the amount of BCH for supplied amount of Sats.');
       socket.emit('update', 'Enter "getMiningInfo" to return mining-related information.');
+      socket.emit('update', 'Enter "txData(TXID)" to return transaction details of the TXID.');
       socket.emit('update', 'Enter utxo(BCH_ADDRESS) to return a list of utxos for a legacy or cash address.');
       socket.emit('update', 'Enter "encryptBIP38, PRIVATEKEYWIF, PASSWORD" to encrypt privkey WIFs with BIP38.');
       socket.emit('example', 'encryptBIP38, L1phBREbhL4vb1uHHHCAse8bdGE5c7ic2PFjRxMawLzQCsiFVbvu, 9GKVkabAHBMyAf');
