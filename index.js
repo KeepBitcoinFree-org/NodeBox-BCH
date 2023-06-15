@@ -130,7 +130,13 @@ if(req.hostname !== 'nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.on
 //	res.setHeader("Content-Security-Policy", "script-src 'self'"); // need to figure out how to allow inline scripts // and download the googlefont im using
 	console.log((new Date).toLocaleTimeString('en-US', { timeZone: 'America/New_York' }) + ' - IP = ' + req.ip + ', req.path = ' + req.path);
 	}
-	res.sendFile(__dirname + '/index.html');
+  
+  // Redirect any requests for nodebox.cash to OG URL nodebox.ddns.net
+  if(req.hostname === 'nodebox.cash'){
+    res.redirect(301, 'https://nodebox.ddns.net');
+  }else{
+    res.sendFile(__dirname + '/index.html');
+  }
 });
 
 // ADD HTTP HEADERS IN TO SOCKET.IO REQUESTS
