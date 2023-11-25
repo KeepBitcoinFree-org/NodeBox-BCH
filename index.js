@@ -115,7 +115,8 @@ console.log('received request for nodebox.ddns.net/ - hostname = ' +  req.hostna
 // If this isn't an onion request, server headers to user for security
 if(req.hostname !== 'nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion'){
 	console.log('h0stname is not nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion, setting headers');
-	res.set("Onion-Location", "http://nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion$request_uri");
+	console.log('req.protocol = ', req.protocol);
+	res.set("Onion-Location", "http://nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion");
 	res.setHeader("Access-Control-Allow-Origin", "https://nodebox.ddns.net");
 	res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
 	res.setHeader("X-Content-Type-Options", "nosniff");
@@ -141,7 +142,7 @@ if(req.hostname !== 'nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.on
 
 // ADD HTTP HEADERS IN TO SOCKET.IO REQUESTS
 io.engine.on("headers", (headers, req) => {
-  headers["Onion-Location"] = "http://nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion$request_uri";
+  headers["Onion-Location"] = "http://nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion";
 });
 
 
