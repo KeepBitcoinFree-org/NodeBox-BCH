@@ -9,18 +9,19 @@ app.use(express.static('public'));
 // using HTTPS instead of HTTP. Like shielded ZEC, or CashFusion on BCH, instead of BTC.
 const fs = require("fs");
 const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/nodebox.ddns.net/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/nodebox.ddns.net/fullchain.pem')
+  key: fs.readFileSync('/etc/letsencrypt/live/nodebox.688.org/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/nodebox.688.org/fullchain.pem')
 };
 const https = require('https').Server(options, app);
 
 // Creating Socket instance and attaching to HTTPS server. Also setting port to 443 for HTTPS
 var io = require('socket.io')(https, { forceNew: true, transports: ['polling'] }); //, {
 
+//TODO: USE TOR PROXY FOR ALL COMMUNICATIONS to/from @psf-bch  ***
 
 //io2.attach(httpApp);
 //  cors: {
-//    origin: "https://nodebox-ddns.net"
+//    origin: "https://nodebox.688.org"
    //  methods: ["GET", "POST"]
 //  }
 //});
@@ -69,7 +70,7 @@ var port = process.env.PORT || 443;
 //   }else{
 //     // otherwise redirect any other HTTP traffic to HTTPS URL
 //     console.log((new Date).toLocaleTimeString('en-US', { timeZone: 'America/New_York' }) + " - REDIRECTING TO HTTPS for " + req.ip);
-//     res.redirect(301, 'https://nodebox.ddns.net');
+//     res.redirect(301, 'https://nodebox.688.org');
 //   }
 
 // })
@@ -110,14 +111,14 @@ function numberWithCommas(x) {
 // SERVES PAGE WHEN REQ IS RECIEVED, SENDS BACK RESPONSE
 app.get('/', function(req, res) {
 
-console.log('received request for nodebox.ddns.net/ - hostname = ' +  req.hostname);
+console.log('received request for nodebox.688.org/ - hostname = ' +  req.hostname);
 
 // If this isn't an onion request, server headers to user for security
 if(req.hostname !== 'nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion'){
 	console.log('h0stname is not nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion, setting headers');
 	console.log('req.protocol = ', req.protocol);
 	res.set("Onion-Location", "http://nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion");
-	res.setHeader("Access-Control-Allow-Origin", "https://nodebox.ddns.net");
+	res.setHeader("Access-Control-Allow-Origin", "https://nodebox.688.org");
 	res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
 	res.setHeader("X-Content-Type-Options", "nosniff");
 	res.setHeader("X-Frame-Options", "SAMEORIGIN");
@@ -132,9 +133,9 @@ if(req.hostname !== 'nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.on
 	console.log((new Date).toLocaleTimeString('en-US', { timeZone: 'America/New_York' }) + ' - IP = ' + req.ip + ', req.path = ' + req.path);
 	}
   
-  // Redirect any requests for nodebox.cash to OG URL nodebox.ddns.net
-  if(req.hostname === 'nodebox.cash'){
-    res.redirect(301, 'https://nodebox.ddns.net');
+  // Redirect any requests for nodebox.cash to OG URL nodebox.688.org
+  if(req.hostname === 'nodebox.cash' || req.hostname === 'www.nodebox.cash'){
+    res.redirect(301, 'https://nodebox.688.org');
   }else{
     res.sendFile(__dirname + '/index.html');
   }
