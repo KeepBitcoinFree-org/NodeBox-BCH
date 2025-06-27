@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 app.use(express.static('public'));
+var http = require('http').Server(app);
 //var express = require('express');
 
 //const express = require('express');
@@ -8,14 +9,14 @@ app.use(express.static('public'));
 
 // using HTTPS instead of HTTP. Like shielded ZEC, or CashFusion on BCH, instead of BTC.
 const fs = require("fs");
-const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/nodebox.ddns.net/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/nodebox.ddns.net/fullchain.pem')
-};
-const https = require('https').Server(options, app);
+//const options = {
+//  key: fs.readFileSync('/etc/letsencrypt/live/nodebox.ddns.net/privkey.pem'),
+//  cert: fs.readFileSync('/etc/letsencrypt/live/nodebox.ddns.net/fullchain.pem')
+//};
+//const https = require('https').Server(options, app);
 
-// Creating Socket instance and attaching to HTTPS server. Also setting port to 443 for HTTPS
-var io = require('socket.io')(https, { forceNew: true, transports: ['polling'] }); //, {
+// Creating Socket instance and attaching to HTTP server
+var io = require('socket.io')(http, { forceNew: true, transports: ['polling'] }); //, {
 
 
 //io2.attach(httpApp);
@@ -25,65 +26,11 @@ var io = require('socket.io')(https, { forceNew: true, transports: ['polling'] }
 //  }
 //});
 
-io.attach(https);
+io.attach(http);
 //io2.attach(httpApp);
 
-var port = process.env.PORT || 443;
-
-// // HTTP server to redirect requests
-// const httpApp = require('express')();
-// // const httpApp = require('http').createServer();
-// var httpServer = require('http').Server(httpApp);
-// var io2 = require('socket.io')(httpServer, { forceNew: true, transports: ['polling'] });
-// io2.attach(httpServer);
-
-// HTTP server for port 8083
-//var httpApp8083 = require('express')();
-//httpApp8083.listen(8083, () => console.log('HTTP server listening on http://localhost:8083'));
-//httpApp8083.get('*', (req, res) => res.sendFile('index.html', { root: path.join(__dirname, '../html')})) ;
-
-//var http = require('http').Server(app);
-
-// // HTTP APP GET ALL TO REDIRECT.
-// httpApp.get('*', (req, res) => { 
-//   console.log((new Date).toLocaleTimeString('en-US', { timeZone: 'America/New_York' }) + ' - request recieved for HTTP app FROM ' + req.ip);
-//   console.log((new Date).toLocaleTimeString('en-US', { timeZone: 'America/New_York' }) + ' - req.path = ' + req.path);
-//   console.log((new Date).toLocaleTimeString('en-US', { timeZone: 'America/New_York' }) + ' - req.host = ' + req.hostname); 
-//   if(req.hostname === 'nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion'){
-//     // serve page as normal to TOR user
-//        // res.set("Onion-Location", "http://nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion$request_uri");
-//        // res.setHeader("Access-Control-Allow-Origin", "http://nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion");
-//        // res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
-//         //res.setHeader("X-Content-Type-Options", "nosniff");
-//         //res.setHeader("X-Frame-Options", "SAMEORIGIN");
-//        // res.setHeader("Referrer-Policy", "no-referrer");
-//        // res.setHeader("Feature-Policy", "geolocation 'none'; midi 'none'; microphone 'none';");
-//        // res.setHeader("X-Permitted-Cross-Domain-Policies", "none");
-//        // res.setHeader("Pragma", "no-cache");
-//        // res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
-//        // res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
-//        // res.setHeader("Content-Security-Policy", " object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests; block-all-mixed-content");
-// //      res.setHeader("Content-Security-Policy", "script-src 'self'"); // need to figure out how to allow inline scripts // and download the googlefont im using
-//         // console.log('req.path = ' + req.path);
-//         res.sendFile(__dirname + '/index.html');
-//   }else{
-//     // otherwise redirect any other HTTP traffic to HTTPS URL
-//     console.log((new Date).toLocaleTimeString('en-US', { timeZone: 'America/New_York' }) + " - REDIRECTING TO HTTPS for " + req.ip);
-//     res.redirect(301, 'https://nodebox.ddns.net');
-//   }
-
-// })
-// //const httpServer = http.createServer(httpApp);
-// httpApp.listen(80, () => console.log('HTTP server listening: http://localhost'));
-
-// app.get('/js', (req, res) => {
-//   console.log('request = ' + req);
-//   res.sendFile(__dirname + 'js');
-// });
-//app.use(https.static(__dirname + '/js'));
-//app.use('*', (req, res) => {
-//    res.sendFile(__dirname + req.originalUrl)
-//})
+// HTTP APP FOR HIDDEN SERVICE / ONION SITE
+var port = process.env.PORT || 80;
 
 // require syntax for BCHjs by Permissionless Software Foundation psfoundation.cash fullstack.cash 
 // FULLSTACK.CASH in the house. Big thanks to Trout & the Permissionless Software Foundation (PSF) - https://psfoundation.cash
@@ -112,7 +59,7 @@ app.get('/', function(req, res) {
 
 console.log('received request for nodebox.ddns.net/ - hostname = ' +  req.hostname);
 
-// If this isn't an onion request, server headers to user for security
+// If this isn't an onion request, serve headers to user for security
 if(req.hostname !== 'nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion'){
 	console.log('h0stname is not nodeboxwcvppedfntioivqeiyzfjtnw6cqw5qfvmq5d7wulz43ffvbid.onion, setting headers');
 	console.log('req.protocol = ', req.protocol);
@@ -993,6 +940,6 @@ msgColonArray = msg.split(':');
 
 
 // Listen on port set in ENV file, otherwise use default SSL port 443
-https.listen(port, function(){
+http.listen(port, function(){
   console.log('NodeBox is listening on localhost/IP:' + port);
 });
