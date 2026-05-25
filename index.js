@@ -90,7 +90,8 @@ var port = process.env.PORT || 443;
 // FULLSTACK.CASH in the house. Big thanks to Trout & the Permissionless Software Foundation (PSF) - https://psfoundation.cash
 
 // REST API servers.
-const BCHN_MAINNET = 'https://bchn.fullstack.cash/v5/'
+const BCHN_MAINNET = https://bch.fullstack.cash/v6 
+// OLD: 'https://bchn.fullstack.cash/v5/'
 
 // bch-js-examples require code from the main bch-js repo
 const BCHJS = require('@psf/bch-js')
